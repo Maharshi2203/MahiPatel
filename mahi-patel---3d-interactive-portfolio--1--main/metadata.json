@@ -1,0 +1,6 @@
+{
+  "name": "Mahi Patel — 3D Interactive Portfolio",
+  "description": "Minimalist gallery-white WebGL portfolio for Mahi Patel, Interior & Spatial Designer, featuring real 3D geometry, interactive camera paths, and tactile spatial atmospheres.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

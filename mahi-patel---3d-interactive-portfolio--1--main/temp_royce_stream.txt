@@ -1,0 +1,115 @@
+/OC /MC0 BDC 
+BT
+0 0 0 1 k
+/GS0 gs
+/TT0 1 Tf
+-0.015 Tc 0.015 Tw 46 0 0 46 49.002 521.3096 Tm
+[(R)-10 (OYC)-15 (E)-15 (\222)]TJ
+0 Tc 0 Tw 14 0 0 14 54.3838 493.2856 Tm
+[(R)20 (etail St)9.9 (or)10.1 (e Int)10 (erior Des)10 (ign)]TJ
+/TT1 1 Tf
+33.524 2.1 Td
+[(L)15 (OCA)35 (TION)]TJ
+/TT0 1 Tf
+12 0 0 12 523.7158 507.6895 Tm
+[(   Shilp Aar)9.9 (on,Bodak)10 (dev)30 (,Ahmedabad,)10.1 (Gu)10 (jar)20.1 (at.)]TJ
+/TT1 1 Tf
+14 0 0 14 523.7158 492.6895 Tm
+[(PR)5 (O)31 (JECT FOCUS)]TJ
+/TT0 1 Tf
+12 0 0 12 523.7158 477.6895 Tm
+[(   Lux)10 (ur)-19.9 (y choc)5 (olat)10 (e r)9.9 (etail e)10 (xperienc)5 (e)]TJ
+/TT1 1 Tf
+14 0 0 14 78.7808 246.999 Tm
+[(C)1 (ONCEP)5 (T)]TJ
+/TT2 1 Tf
+0 -2.857 Td
+(KANSO)Tj
+/TT1 1 Tf
+16 0 0 16 127.7949 206.999 Tm
+( )Tj
+14 0 0 14 132.0342 206.999 Tm
+[(means s)11 (impl)5 (icity or purity)31 (. The c)5 (onc)5 (ept al)5 (igns with the )]TJ
+-3.804 -1.429 Td
+[(minimal)5 (ist t)11.1 (endencies of modern ar)9 (chit)11 (ec)-5 (tur)9 (e and int)11 (erior des)11 (ign.)]TJ
+0 -2.857 Td
+[(The c)5 (onc)5 (ept is e)11 (xpr)9 (essed thr)9 (ough:)]TJ
+0 -1.429 Td
+(\225)Tj
+1.286 0 Td
+[(M)11 (inimal f)10.9 (orms)]TJ
+-1.286 -1.429 Td
+(\225)Tj
+1.286 0 Td
+[(Str)9 (aight l)5 (ines)]TJ
+-1.286 -1.429 Td
+(\225)Tj
+1.286 0 Td
+[(Clean visual c)4.9 (ompos)11 (ition)]TJ
+-1.286 -1.429 Td
+(\225)Tj
+1.286 0 Td
+[(L)25 (imit)11 (ed mat)10.9 (erial palett)10.9 (e)]TJ
+-1.286 -1.429 Td
+(\225)Tj
+1.286 0 Td
+[(W)11 (arm and c)5 (omf)11 (ort)10.9 (able amb)10.9 (ienc)5 (e)]TJ
+/C2_0 1 Tf
+-1.286 25.583 Td
+[<006400AD009D000200DA00DE>9 <00D0>11 <00BC009D0092>-4.9 <00EA000200B100CA>15 <00FB>11 <00D000C2>5 <00FB>11 <009D0098000200E2009D00C2009D0092>-4.9 <00EA00B100CA00A80002008500CA0002009D>11 <010100B100E200EA00B100CA00A80002009000DE>9 <008500CA00980002008500CA009800020098009D00E2>11 <00B100A800CA00B100CA00A800020085000200DE>9 <009D00EA>11 <008500B100C2000200B100CA00EA>11 <009D00DE00B100D000DE000200EA00AD008500EA000200DE>9 <009D010E009D0092>-5 <00EA00E2000200B100EA00E20002009000DE>9 <008500CA0098000200B10098009D00CA00EA00B100EA01020002>]TJ
+/TT1 1 Tf
+0 -1.429 Td
+[(and e)10.9 (xisting st)11 (or)9 (e f)11 (eatur)9 (es.)]TJ
+0 -1.429 Td
+( )Tj
+0 -1.429 Td
+[(F)25 (or this pr)9 (o)11 (jec)-5 (t, R)5 (O)17 (Y)17 (CE\222)31 (, a Japanese lux)11 (ur)-20 (y choc)5 (olat)11 (e br)9 (and, was selec)-5 (t)11 (ed and its visual language and r)9 (et)11 (ail )]TJ
+0 -1.429 Td
+[(char)9 (ac)-5 (t)11.1 (eristics wer)8.9 (e tr)9 (anslat)11 (ed int)11 (o the int)11 (erior des)11 (ign.)]TJ
+33.241 -5.615 Td
+[(MOOD BO)5 (ARD)]TJ
+ET
+q
+547.28 132.971 150.392 103.818 re
+W n
+q
+150.3915656 0 0 103.817015 547.2800293 132.9718033 cm
+/Im0 Do
+Q
+Q
+q
+547.28 44.2 116.799 83.667 re
+W n
+q
+116.799767 0 0 83.6673819 547.2800293 44.1996454 cm
+/Im1 Do
+Q
+Q
+q
+98.207286 0 0 59.5531037 704.6130371 176.951535 cm
+/Im2 Do
+Q
+q
+668.974 68.262 133.846 102.915 re
+W n
+q
+133.8454913 0 0 102.9148206 668.9748535 68.2625171 cm
+/Im3 Do
+Q
+Q
+0.047 0.103 0.156 0 k
+693.2 44.2 -24.226 21.271 re
+f
+0.055 0.193 0.324 0 k
+720.578 44.2 -24.226 21.271 re
+f
+0.288 0.382 0.466 0.011 k
+747.888 44.2 -24.226 21.271 re
+f
+0.335 0.552 0.8 0.166 k
+775.887 44.2 -24.226 21.271 re
+f
+0.396 0.638 0.944 0.359 k
+802.82 44.2 -24.226 21.271 re
+f
+EMC 

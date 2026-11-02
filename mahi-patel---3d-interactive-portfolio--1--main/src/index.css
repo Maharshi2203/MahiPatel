@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg-white: #FFFFFF;
+  --color-bg-surface: #F8F8F6;
+  --color-bg-card: #FFFFFF;
+  --color-bg-card-muted: #F2F1ED;
+  --color-ink: #141413;
+  --color-ink-dim: #6E6C65;
+  --color-line: #E5E3DD;
+  --color-line-light: #ECEAE4;
+  --color-accent: #9A773E;
+  --color-accent-soft: #B89B68;
+  --color-accent-dim: #EFE9DC;
+
+  --font-display: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Newsreader", Georgia, serif;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+}
+
+:root {
+  --bg-white: #FFFFFF;
+  --bg-surface: #F8F8F6;
+  --ink: #141413;
+  --ink-dim: #6E6C65;
+  --line: #E5E3DD;
+  --accent: #9A773E;
+  --accent-soft: #B89B68;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #FFFFFF;
+  color: #141413;
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom subtle scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F8F6;
+}
+::-webkit-scrollbar-thumb {
+  background: #DCD9D2;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9A773E;
+}
+
+/* Noise overlay */
+.noise-overlay {
+  background-image: radial-gradient(rgba(154, 119, 62, 0.04) 1px, transparent 0);
+  background-size: 24px 24px;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 28s linear infinite;
+}
+
+/* Utility classes */
+.font-display {
+  font-family: "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  letter-spacing: -0.025em;
+}
+.font-sans {
+  font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+.font-serif {
+  font-family: "Newsreader", Georgia, serif;
+}
+.font-mono-code {
+  font-family: "Space Mono", ui-monospace, monospace;
+}
+
