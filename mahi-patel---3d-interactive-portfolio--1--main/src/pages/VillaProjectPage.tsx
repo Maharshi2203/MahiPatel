@@ -821,7 +821,7 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
 
             <div
               onClick={(e) => e.stopPropagation()}
-              className="flex-1 flex items-center justify-center p-2 sm:p-6 overflow-auto"
+              data-lenis-prevent className="flex-1 flex items-center justify-center p-2 sm:p-6 overflow-auto"
             >
               <img
                 src={lightboxImage.src}

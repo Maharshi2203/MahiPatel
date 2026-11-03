@@ -15,6 +15,7 @@ import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { LayoutGroup } from 'motion/react';
 import { FEATURED_PROJECTS } from './data/featuredProjects';
+import { scrollToTop, useScrollReveal, useSmoothScroll } from './lib/motion';
 
 const getInitialRoute = (): PageRoute => {
   if (typeof window !== 'undefined') {
@@ -80,6 +81,9 @@ const getInitialRoute = (): PageRoute => {
 export default function App() {
   const [preloaderComplete, setPreloaderComplete] = useState(false);
   const [route, setRoute] = useState<PageRoute>(getInitialRoute);
+  const routeKey = `${route.name}:${'slug' in route ? route.slug : ''}`;
+  useSmoothScroll();
+  useScrollReveal(routeKey);
   const [mode, setMode] = useState<DisciplineMode>('interior');
   const [cursorState, setCursorState] = useState<CursorState>('default');
   const [cursorText, setCursorText] = useState<string | undefined>(undefined);
@@ -87,7 +91,7 @@ export default function App() {
   // Scroll to top on navigation change & sync document title
   const handleNavigate = (newRoute: PageRoute) => {
     setRoute(newRoute);
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    scrollToTop();
     setCursorState('default');
     setCursorText(undefined);
 
@@ -151,7 +155,7 @@ export default function App() {
   const handleReplayPreloader = () => {
     sessionStorage.removeItem('mahi_portfolio_visited');
     setPreloaderComplete(false);
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    scrollToTop();
   };
 
   const handleCursorChange = useCallback((state: CursorState, text?: string) => {
@@ -183,7 +187,7 @@ export default function App() {
         />
 
         {/* Page Routing */}
-        <main className="relative z-10">
+        <main key={routeKey} className="relative z-10 page-enter">
           {route.name === 'home' && (
             <HomePage
               mode={mode}

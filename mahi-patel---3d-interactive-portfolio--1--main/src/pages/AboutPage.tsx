@@ -83,7 +83,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onCursorChange
   return (
     <div id="about-page" className="relative min-h-screen bg-[#FFFFFF] text-[#141413] pt-28 md:pt-32 pb-28">
       {/* 1. Portrait & introduction */}
-      <section className="px-6 md:px-14 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
+      <section data-reveal className="px-6 md:px-14 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-16 items-start">
         <figure className="md:col-span-5 md:sticky md:top-28">
           <div className="relative overflow-hidden bg-[#ECEBE7] aspect-[4/5]">
             <img
@@ -155,7 +155,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onCursorChange
       </section>
 
       {/* 2. Philosophy */}
-      <section className="mt-24 md:mt-32 bg-[#F8F8F6] border-y border-[#E5E3DD]">
+      <section data-reveal className="mt-24 md:mt-32 bg-[#F8F8F6] border-y border-[#E5E3DD]">
         <div className="px-6 md:px-14 max-w-5xl mx-auto py-20 md:py-24 text-center">
           <Eyebrow center>Philosophy</Eyebrow>
           <blockquote className="mt-8 font-display font-light text-2xl sm:text-3xl md:text-4xl leading-snug text-[#141413]">
@@ -166,7 +166,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onCursorChange
       </section>
 
       {/* 3. Design focus */}
-      <section className="px-6 md:px-14 max-w-6xl mx-auto mt-24 md:mt-28">
+      <section data-reveal className="px-6 md:px-14 max-w-6xl mx-auto mt-24 md:mt-28">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10">
           <div className="md:col-span-4">
             <Eyebrow>Design Focus</Eyebrow>
@@ -189,7 +189,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onCursorChange
       </section>
 
       {/* 4. Education & skills */}
-      <section className="px-6 md:px-14 max-w-6xl mx-auto mt-24 md:mt-28 grid grid-cols-1 md:grid-cols-12 gap-12">
+      <section data-reveal className="px-6 md:px-14 max-w-6xl mx-auto mt-24 md:mt-28 grid grid-cols-1 md:grid-cols-12 gap-12">
         <div className="md:col-span-6">
           <Eyebrow>Education</Eyebrow>
           <ul className="mt-8 space-y-8">
@@ -236,7 +236,7 @@ export const AboutPage: React.FC<AboutPageProps> = ({ onNavigate, onCursorChange
       </section>
 
       {/* 5. Academic studios */}
-      <section className="px-6 md:px-14 max-w-6xl mx-auto mt-24 md:mt-28">
+      <section data-reveal className="px-6 md:px-14 max-w-6xl mx-auto mt-24 md:mt-28">
         <div className="flex items-end justify-between pb-6 border-b border-[#E5E3DD]">
           <div>
             <Eyebrow>Academic Studios</Eyebrow>

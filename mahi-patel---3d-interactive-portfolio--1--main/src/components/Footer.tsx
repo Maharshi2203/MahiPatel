@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { PageRoute } from '../types';
 import { FEATURED_PROJECTS } from '../data/featuredProjects';
 import { CONTACT_FORM_ID, SCROLL_TO_FORM_KEY } from '../pages/ContactPage';
+import { smoothScrollTo } from '../lib/motion';
 
 interface FooterProps {
   onNavigate: (route: PageRoute) => void;
@@ -54,7 +55,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onReplayPreloader, o
   /** Scroll to the contact form if it's on screen, otherwise open the Contact page at the form. */
   const goToContactForm = () => {
     const form = document.getElementById(CONTACT_FORM_ID);
-    if (form) return form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (form) return smoothScrollTo(form);
     try {
       sessionStorage.setItem(SCROLL_TO_FORM_KEY, '1');
     } catch {}
@@ -78,7 +79,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onReplayPreloader, o
   ];
 
   const heading = 'font-mono-code text-[10px] uppercase tracking-[0.22em] text-[#C9A47E] mb-4';
-  const link = 'text-left text-[#D9D4CA] hover:text-white transition-colors duration-300';
+  const link = 'text-left py-1.5 md:py-0 text-[#D9D4CA] hover:text-white transition-colors duration-300';
 
   return (
     <footer id="main-footer" className="relative z-20 bg-[#141413] text-[#A8A399] overflow-hidden">
@@ -95,27 +96,27 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onReplayPreloader, o
               <span className="italic text-[#C9A47E]">that feel considered.</span>
             </h2>
           </div>
-          <div className="md:col-span-4 md:justify-self-end">
+          <div className="md:col-span-4 md:justify-self-end w-full md:w-auto">
             <button
               type="button"
               onClick={goToContactForm}
               {...hover}
-              className="group inline-flex items-center gap-4 rounded-full border border-[#C9A47E]/60 px-6 py-3 text-sm text-[#F4F1EA] transition-colors duration-300 hover:bg-[#C9A47E] hover:text-[#141413]"
+              className="group w-full md:w-auto inline-flex items-center justify-center md:justify-start gap-4 rounded-full border border-[#C9A47E]/60 px-6 py-4 md:py-3 text-sm text-[#F4F1EA] transition-colors duration-300 hover:bg-[#C9A47E] hover:text-[#141413]"
             >
               Start a conversation
               <span aria-hidden="true" className="transition-transform duration-300 group-hover:translate-x-1">
                 →
               </span>
             </button>
-            <a href={`mailto:${EMAIL}`} {...hover} className="mt-3 block text-sm text-[#D9D4CA] hover:text-white transition-colors">
+            <a href={`mailto:${EMAIL}`} {...hover} className="mt-4 md:mt-3 block text-center md:text-left text-sm text-[#D9D4CA] hover:text-white transition-colors">
               {EMAIL}
             </a>
           </div>
         </div>
 
         {/* Columns */}
-        <div className="py-10 md:py-12 grid grid-cols-2 gap-y-10 gap-x-8 md:grid-cols-12 text-sm">
-          <div className="col-span-2 md:col-span-4 md:pr-10">
+        <div className="py-10 md:py-12 grid grid-cols-2 gap-y-9 gap-x-6 md:gap-y-10 md:gap-x-8 md:grid-cols-12 text-sm">
+          <div className="col-span-2 md:col-span-4 md:pr-10 order-1 md:order-none">
             <div className="font-display text-xl text-[#F4F1EA] font-light mb-4">Mahi Patel</div>
             <p className="leading-relaxed text-[#A8A399] max-w-sm">
               Interior &amp; spatial designer based in Ahmedabad, crafting retail, hospitality and residential
@@ -130,7 +131,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onReplayPreloader, o
             </div>
           </div>
 
-          <nav className="md:col-span-3" aria-label="Selected projects">
+          <nav className="md:col-span-3 order-2 md:order-none" aria-label="Selected projects">
             <h3 className={heading}>Selected Work</h3>
             <ul className="space-y-2.5">
               {FEATURED_PROJECTS.map((p, i) => (
@@ -146,17 +147,22 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onReplayPreloader, o
             </ul>
           </nav>
 
-          <div className="md:col-span-3">
+          <div className="col-span-2 md:col-span-3 order-4 md:order-none">
             <h3 className={heading}>Expertise</h3>
-            <ul className="space-y-2.5 text-[#D9D4CA]">
+            <ul className="flex flex-wrap gap-2 md:block md:space-y-2.5 text-[#D9D4CA]">
               {EXPERTISE.map((e) => (
-                <li key={e}>{e}</li>
+                <li
+                  key={e}
+                  className="rounded-full border border-white/15 px-3.5 py-1.5 text-xs md:rounded-none md:border-0 md:p-0 md:text-sm"
+                >
+                  {e}
+                </li>
               ))}
             </ul>
           </div>
 
-          <div className="md:col-span-2 space-y-8">
-            <nav aria-label="Studio">
+          <div className="max-md:contents md:col-span-2 md:space-y-8">
+            <nav aria-label="Studio" className="order-3 md:order-none">
               <h3 className={heading}>Studio</h3>
               <ul className="space-y-2.5">
                 {studioLinks.map((l) => (
@@ -168,9 +174,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onReplayPreloader, o
                 ))}
               </ul>
             </nav>
-            <div>
+            <div className="col-span-2 order-5 md:order-none max-md:border-t max-md:border-white/10 max-md:pt-8">
               <h3 className={heading}>Follow</h3>
-              <ul className="space-y-2.5">
+              <ul className="flex flex-wrap gap-x-7 gap-y-1 md:block md:space-y-2.5">
                 {SOCIALS.map((s) => (
                   <li key={s.label}>
                     <a href={s.href} target="_blank" rel="noreferrer" {...hover} className={`${link} inline-flex items-center gap-1.5`}>
@@ -188,24 +194,24 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onReplayPreloader, o
 
       {/* Oversized wordmark */}
       <div aria-hidden="true" className="select-none px-4 md:px-8 leading-none">
-        <div className="font-display font-light text-[#F4F1EA]/[0.06] text-center tracking-tight whitespace-nowrap text-[9vw] pb-[0.5vw]">
+        <div className="font-display font-light text-[#F4F1EA]/[0.06] text-center tracking-tight whitespace-nowrap text-[17vw] md:text-[9vw] pb-[1vw] md:pb-[0.5vw]">
           MAHI PATEL
         </div>
       </div>
 
       {/* Bottom bar */}
       <div className="relative border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#6E6A62]">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 sm:py-5 flex flex-col sm:flex-row items-center justify-between gap-3 sm:gap-4 text-center sm:text-left text-[11px] text-[#6E6A62]">
           <span>© {new Date().getFullYear()} Mahi Patel — Interior &amp; Spatial Design</span>
           <span>Ahmedabad, India · {studioTime || '--:--'} IST</span>
-          <div className="flex items-center gap-6">
-            <button onClick={onReplayPreloader} {...hover} className="hover:text-[#C9A47E] transition-colors">
+          <div className="flex items-center gap-6 pt-1 sm:pt-0">
+            <button onClick={onReplayPreloader} {...hover} className="py-2 sm:py-0 hover:text-[#C9A47E] transition-colors">
               Replay intro
             </button>
             <button
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={() => smoothScrollTo(document.body, 0)}
               {...hover}
-              className="inline-flex items-center gap-1.5 hover:text-[#C9A47E] transition-colors"
+              className="py-2 sm:py-0 inline-flex items-center gap-1.5 hover:text-[#C9A47E] transition-colors"
             >
               Back to top <span aria-hidden="true">↑</span>
             </button>

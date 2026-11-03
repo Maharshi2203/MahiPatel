@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { PageRoute } from '../types';
 import { ArrowUpRight, Check, Copy, Loader2 } from 'lucide-react';
+import { smoothScrollTo } from '../lib/motion';
 
 interface ContactPageProps {
   onNavigate: (route: PageRoute) => void;
@@ -13,11 +14,18 @@ export const SCROLL_TO_FORM_KEY = 'mahi_scroll_to_contact_form';
 export const CONTACT_FORM_ID = 'contact-form';
 
 /**
- * Submissions are delivered by FormSubmit (https://formsubmit.co), which forwards
- * them to CONTACT_EMAIL. The very first submission triggers a one-time activation
- * email to that inbox; messages are delivered once the link in it is clicked.
+ * Submissions are delivered by Web3Forms (https://web3forms.com) to the inbox the
+ * access key was created for (mahipatel1329@gmail.com).
+ *
+ * Get a free key at https://web3forms.com → enter the email → the key arrives by
+ * email. Paste it below, or set VITE_WEB3FORMS_ACCESS_KEY in a .env file.
+ * The key is designed to be public: it can only send mail to that one inbox.
  */
-const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
+const WEB3FORMS_ACCESS_KEY: string =
+  (import.meta as ImportMeta & { env: Record<string, string | undefined> }).env.VITE_WEB3FORMS_ACCESS_KEY ||
+  '96b58fc6-48fd-4b63-8204-3ffe18ae7242';
+const FORM_ENDPOINT = 'https://api.web3forms.com/submit';
+const FORM_CONFIGURED = /^[0-9a-f-]{36}$/i.test(WEB3FORMS_ACCESS_KEY);
 
 const ENQUIRY_TYPES = ['Internship', 'Project Commission', 'Collaboration', 'Other'];
 
@@ -30,10 +38,25 @@ const Eyebrow: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </div>
 );
 
-const fieldClass =
-  'peer w-full bg-transparent border-0 border-b border-[#D9D6CE] px-0 pt-6 pb-2.5 text-base text-[#141413] placeholder-transparent focus:outline-none focus:ring-0 focus:border-[#141413] transition-colors';
-const labelClass =
-  'pointer-events-none absolute left-0 top-1.5 font-mono-code text-[10px] uppercase tracking-[0.18em] text-[#7A7770] transition-all peer-placeholder-shown:top-6 peer-placeholder-shown:text-sm peer-placeholder-shown:normal-case peer-placeholder-shown:tracking-normal peer-placeholder-shown:font-sans peer-focus:top-1.5 peer-focus:font-mono-code peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-[0.18em] peer-focus:text-[#9A773E]';
+const inputClass =
+  'w-full bg-transparent border-0 border-b border-[#D9D6CE] px-0 py-3 font-sans text-base text-[#141413] placeholder:text-[#B3AFA6] focus:outline-none focus:ring-0 transition-colors duration-500';
+
+/** Label above, input below, with a gold underline that draws in on focus. */
+const Field: React.FC<{ label: string; required?: boolean; children: React.ReactNode }> = ({ label, required, children }) => (
+  <label className="group block">
+    <span className="block font-mono-code text-[10px] uppercase tracking-[0.18em] text-[#7A7770] transition-colors duration-500 group-focus-within:text-[#9A773E]">
+      {label}
+      {required && <span className="text-[#9A773E]"> *</span>}
+    </span>
+    <span className="relative block">
+      {children}
+      <span
+        aria-hidden="true"
+        className="pointer-events-none absolute left-0 right-0 bottom-0 h-px origin-left scale-x-0 bg-[#9A773E] transition-transform duration-700 group-focus-within:scale-x-100"
+      />
+    </span>
+  </label>
+);
 
 export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onCursorChange }) => {
   const [copied, setCopied] = useState(false);
@@ -61,7 +84,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onCursorCh
       sessionStorage.removeItem(SCROLL_TO_FORM_KEY);
     } catch {}
     if (!wanted) return;
-    const t = setTimeout(() => document.getElementById(CONTACT_FORM_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 80);
+    const t = setTimeout(() => smoothScrollTo(document.getElementById(CONTACT_FORM_ID)), 120);
     return () => clearTimeout(t);
   }, []);
 
@@ -82,24 +105,26 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onCursorCh
     if (form.honey) return setStatus('sent'); // bot filled the hidden field
     setStatus('sending');
     try {
+      if (!FORM_CONFIGURED) throw new Error('Web3Forms access key is not set (see ContactPage.tsx).');
       const res = await fetch(FORM_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
         body: JSON.stringify({
+          access_key: WEB3FORMS_ACCESS_KEY,
+          subject: `New ${form.enquiry.toLowerCase()} enquiry from ${form.name} — Portfolio`,
+          from_name: 'Mahi Patel Portfolio',
+          replyto: form.email,
+          botcheck: '',
           Name: form.name,
           Email: form.email,
           Phone: form.phone || '—',
           'Enquiry type': form.enquiry,
-          'Project location': form.location || '—',
+          'Company / project location': form.location || '—',
           Message: form.message,
-          _subject: `New ${form.enquiry.toLowerCase()} enquiry from ${form.name} — Portfolio`,
-          _replyto: form.email,
-          _template: 'table',
-          _captcha: 'false',
         }),
       });
       const data = await res.json().catch(() => ({}));
-      if (!res.ok || data.success === false || data.success === 'false') throw new Error(data.message || res.statusText);
+      if (!res.ok || !data.success) throw new Error(data.message || res.statusText);
       setStatus('sent');
       setForm({ name: '', email: '', phone: '', enquiry: ENQUIRY_TYPES[0], location: '', message: '', honey: '' });
     } catch (err) {
@@ -115,7 +140,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onCursorCh
   return (
     <div id="contact-page" className="relative min-h-screen bg-[#FFFFFF] text-[#141413] pt-28 md:pt-32 pb-24">
       {/* Hero */}
-      <section className="px-6 md:px-14 max-w-6xl mx-auto">
+      <section data-reveal className="px-6 md:px-14 max-w-6xl mx-auto">
         <Eyebrow>Contact</Eyebrow>
         <div className="mt-6 grid grid-cols-1 md:grid-cols-12 gap-8 md:items-end">
           <h1 className="md:col-span-8 font-display font-light text-4xl sm:text-5xl md:text-6xl leading-[1.05] tracking-tight">
@@ -131,7 +156,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onCursorCh
       </section>
 
       {/* Details + form */}
-      <section className="px-6 md:px-14 max-w-6xl mx-auto mt-16 md:mt-20 pt-12 border-t border-[#E5E3DD] grid grid-cols-1 md:grid-cols-12 gap-14">
+      <section data-reveal data-reveal-delay="120" className="px-6 md:px-14 max-w-6xl mx-auto mt-16 md:mt-20 pt-12 border-t border-[#E5E3DD] grid grid-cols-1 md:grid-cols-12 gap-14">
         <aside className="md:col-span-4 space-y-10">
           <div>
             <div className="font-mono-code text-[10px] uppercase tracking-[0.2em] text-[#7A7770]">Email</div>
@@ -190,7 +215,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onCursorCh
 
         <div id={CONTACT_FORM_ID} className="md:col-span-8 scroll-mt-28">
           {status === 'sent' ? (
-            <div className="border border-[#E5E3DD] bg-[#F8F8F6] p-10 md:p-14" role="status">
+            <div className="page-enter border border-[#E5E3DD] bg-[#F8F8F6] p-10 md:p-14" role="status">
               <div className="h-12 w-12 rounded-full bg-[#141413] text-white inline-flex items-center justify-center">
                 <Check className="h-5 w-5" />
               </div>
@@ -205,7 +230,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onCursorCh
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-8" noValidate={false}>
+            <form onSubmit={handleSubmit} className="page-enter space-y-9">
               <div>
                 <div className="font-mono-code text-[10px] uppercase tracking-[0.2em] text-[#7A7770] mb-4">I’m reaching out about</div>
                 <div className="flex flex-wrap gap-2.5" role="radiogroup" aria-label="Enquiry type">
@@ -229,37 +254,32 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onCursorCh
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6">
-                <label className="relative block">
-                  <input required name="name" autoComplete="name" placeholder="Full name" value={form.name} onChange={set('name')} className={fieldClass} />
-                  <span className={labelClass}>Full name *</span>
-                </label>
-                <label className="relative block">
-                  <input required type="email" name="email" autoComplete="email" placeholder="Email" value={form.email} onChange={set('email')} className={fieldClass} />
-                  <span className={labelClass}>Email *</span>
-                </label>
-                <label className="relative block">
-                  <input type="tel" name="phone" autoComplete="tel" placeholder="Phone" value={form.phone} onChange={set('phone')} className={fieldClass} />
-                  <span className={labelClass}>Phone (optional)</span>
-                </label>
-                <label className="relative block">
-                  <input name="location" placeholder="Location" value={form.location} onChange={set('location')} className={fieldClass} />
-                  <span className={labelClass}>Company / project location</span>
-                </label>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-8">
+                <Field label="Full name" required>
+                  <input required name="name" autoComplete="name" placeholder="Your name" value={form.name} onChange={set('name')} className={inputClass} />
+                </Field>
+                <Field label="Email" required>
+                  <input required type="email" name="email" autoComplete="email" placeholder="you@example.com" value={form.email} onChange={set('email')} className={inputClass} />
+                </Field>
+                <Field label="Phone">
+                  <input type="tel" name="phone" autoComplete="tel" placeholder="Optional" value={form.phone} onChange={set('phone')} className={inputClass} />
+                </Field>
+                <Field label="Company / project location">
+                  <input name="location" placeholder="e.g. Ahmedabad studio, residence in Surat" value={form.location} onChange={set('location')} className={inputClass} />
+                </Field>
               </div>
 
-              <label className="relative block">
+              <Field label="Message" required>
                 <textarea
                   required
                   rows={5}
                   name="message"
-                  placeholder="Message"
+                  placeholder="Tell me about your project, role or idea…"
                   value={form.message}
                   onChange={set('message')}
-                  className={`${fieldClass} resize-none`}
+                  className={`${inputClass} resize-none`}
                 />
-                <span className={labelClass}>Tell me about your project or opportunity *</span>
-              </label>
+              </Field>
 
               {/* Honeypot — hidden from people, catches bots */}
               <input type="text" name="_honey" tabIndex={-1} autoComplete="off" value={form.honey} onChange={set('honey')} className="hidden" aria-hidden="true" />
@@ -297,7 +317,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate, onCursorCh
       </section>
 
       {/* Closing link to work */}
-      <section className="px-6 md:px-14 max-w-6xl mx-auto mt-24 pt-10 border-t border-[#E5E3DD] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <section data-reveal className="px-6 md:px-14 max-w-6xl mx-auto mt-24 pt-10 border-t border-[#E5E3DD] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <p className="font-display font-light text-2xl text-[#141413]">Not ready to write yet?</p>
         <button
           onClick={() => onNavigate({ name: 'work' })}

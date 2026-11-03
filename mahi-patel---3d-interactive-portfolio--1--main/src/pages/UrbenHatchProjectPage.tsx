@@ -940,7 +940,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
             </div>
 
             {/* Lightbox Image Container */}
-            <div className="flex-1 flex items-center justify-center overflow-auto p-2 sm:p-4">
+            <div data-lenis-prevent className="flex-1 flex items-center justify-center overflow-auto p-2 sm:p-4">
               <img
                 src={lightboxImage.src}
                 alt={lightboxImage.title}

@@ -38,9 +38,12 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({ cursorState, cursorT
     const onMouseLeave = () => setIsVisible(false);
     const onMouseEnter = () => setIsVisible(true);
 
-    const render = () => {
-      // Smooth lerp for outer ring
-      const factor = 0.18;
+    let last = performance.now();
+    const render = (now: number = performance.now()) => {
+      // Time-based easing for the outer ring: same glide at 60Hz, 120Hz or 144Hz
+      const dt = Math.min((now - last) / 1000, 0.1);
+      last = now;
+      const factor = 1 - Math.exp(-dt * 11);
       ringX += (mouseX - ringX) * factor;
       ringY += (mouseY - ringY) * factor;
 
@@ -90,7 +93,7 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({ cursorState, cursorT
       <div
         ref={cursorDotRef}
         id="cursor-center-dot"
-        className={`fixed top-0 left-0 -ml-1 -mt-1 h-2 w-2 rounded-full bg-[#141413] transition-transform duration-75 ${
+        className={`fixed top-0 left-0 -ml-1 -mt-1 h-2 w-2 rounded-full bg-[#141413] transition-opacity duration-300 will-change-transform ${
           displayText ? 'opacity-0' : 'opacity-100'
         }`}
       />
@@ -99,7 +102,7 @@ export const CustomCursor: React.FC<CustomCursorProps> = ({ cursorState, cursorT
       <div
         ref={cursorRingRef}
         id="cursor-outer-ring"
-        className="fixed top-0 left-0 -ml-3 -mt-3 flex items-center justify-center transition-all duration-200 ease-out will-change-transform"
+        className="fixed top-0 left-0 -ml-3 -mt-3 flex items-center justify-center transition-opacity duration-300 will-change-transform"
       >
         <div
           className={`flex items-center justify-center rounded-full border transition-all duration-300 ${

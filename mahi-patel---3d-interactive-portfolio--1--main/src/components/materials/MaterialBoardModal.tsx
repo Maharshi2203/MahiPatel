@@ -134,7 +134,7 @@ export const MaterialBoardModal: React.FC<MaterialBoardModalProps> = ({
             {/* ---------------------------------------------------- */}
             {/* Modal Body: Two-column Interactive Tactile Board     */}
             {/* ---------------------------------------------------- */}
-            <div className="flex-1 overflow-y-auto grid grid-cols-1 lg:grid-cols-12 gap-0 divide-y lg:divide-y-0 lg:divide-x divide-[#E5E2DA]">
+            <div data-lenis-prevent className="flex-1 overflow-y-auto grid grid-cols-1 lg:grid-cols-12 gap-0 divide-y lg:divide-y-0 lg:divide-x divide-[#E5E2DA]">
               {/* Left Column: Swatch Selection Palette (5 cols) */}
               <div className="lg:col-span-5 p-5 md:p-6 bg-[#FAF9F5]/70 flex flex-col gap-4">
                 <div className="flex items-center justify-between">
