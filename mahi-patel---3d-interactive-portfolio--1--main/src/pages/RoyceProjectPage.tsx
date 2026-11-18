@@ -11,7 +11,6 @@ import {
   MapPin,
   Tag,
   Building2,
-  Ruler,
 } from 'lucide-react';
 import { CursorState, PageRoute } from '../types';
 import { FEATURED_PROJECTS, wrapProjectIndex, projectIndexBySlug } from '../data/featuredProjects';
@@ -25,34 +24,6 @@ interface RoyceProjectPageProps {
 
 const EASE = [0.76, 0, 0.24, 1] as const;
 
-// 5-Swatch Palette extracted directly from Mahi Patel's ROYCE' PDF Sheet
-const COLOR_PALETTE = [
-  {
-    name: 'Rice Paper / Cream Stone',
-    hex: '#EDE5D8',
-    description: 'Textured wall plaster, primary floor travertine & warm light bounce',
-  },
-  {
-    name: 'Natural Birch / Light Oak',
-    hex: '#E4C7A5',
-    description: 'Custom joinery, vertical timber lattices & open retail shelving',
-  },
-  {
-    name: 'Warm Cocoa Taupe',
-    hex: '#B0917E',
-    description: 'Acoustic wall paneling, subtle tactile textiles & shadow reveals',
-  },
-  {
-    name: 'Roasted Cocoa Wood',
-    hex: '#7A583E',
-    description: 'Display plinths, counter wave accents & brand frame details',
-  },
-  {
-    name: 'Dark Chocolate Espresso',
-    hex: '#523B2B',
-    description: 'Structural perimeter framing, portal base reveals & accent hardware',
-  },
-];
 
 // The 5 core Kanso principles
 const KANSO_KEYWORDS = [
@@ -86,15 +57,6 @@ const KANSO_KEYWORDS = [
 // Architectural elevations data
 const ELEVATIONS = [
   {
-    id: 'elevation-b',
-    title: 'Elevation B — Storefront Glazing & Entrance Portal',
-    scale: '1:20',
-    src: '/royce/elevation-b-clean.png',
-    caption:
-      'Storefront facade featuring clear floor-to-ceiling glass, custom textured stone portal, illuminated ROYCE’ CHOCOLATE signage, and transparent sightlines into central display plinths.',
-    highlights: ['Clear storefront glazing', 'Full-height stone portal', 'Illuminated signage', 'Pedestrian scale integration'],
-  },
-  {
     id: 'elevation-a',
     title: 'Elevation A — Staggered Timber Display Shelving',
     scale: '1:20',
@@ -102,6 +64,15 @@ const ELEVATIONS = [
     caption:
       'Asymmetrical floating timber display shelves anchored to a central vertical wood spine against a textured cream plaster backdrop, presenting signature packaged chocolate boxes.',
     highlights: ['Staggered horizontal cantilever shelves', 'Solid central timber column', 'Natural plaster textured wall', 'Integrated product display'],
+  },
+  {
+    id: 'elevation-b',
+    title: 'Elevation B — Storefront Glazing & Entrance Portal',
+    scale: '1:20',
+    src: '/royce/elevation-b-clean.png',
+    caption:
+      'Storefront facade featuring clear floor-to-ceiling glass, custom textured stone portal, illuminated ROYCE’ CHOCOLATE signage, and transparent sightlines into central display plinths.',
+    highlights: ['Clear storefront glazing', 'Full-height stone portal', 'Illuminated signage', 'Pedestrian scale integration'],
   },
   {
     id: 'elevation-c',
@@ -130,7 +101,7 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
   onCursorChange,
 }) => {
   const reduced = !!useReducedMotion();
-  const [activeElevationTab, setActiveElevationTab] = useState<string>('all');
+  const [activeElevationTab, setActiveElevationTab] = useState<string>('elevation-a');
   const [lightboxImage, setLightboxImage] = useState<{ src: string; title: string; subtitle?: string } | null>(null);
 
   // Close lightbox on Escape key
@@ -222,7 +193,7 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
       {/* ========================================================================= */}
       <section className="max-w-7xl mx-auto px-6 md:px-12">
         <header className="pb-10 md:pb-14">
-          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-10">
+          <div className="flex flex-col gap-10 md:gap-12">
             {/* Title Block */}
             <div className="space-y-3">
               <h1 className="font-display font-light text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight text-[#141413] leading-[0.92]">
@@ -231,13 +202,13 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
               <p className="font-serif italic text-lg sm:text-xl md:text-2xl text-[#9A773E] tracking-wide">
                 Retail Store Interior Design
               </p>
-              <p className="max-w-xl font-mono-code text-xs md:text-sm text-[#7A7770] leading-relaxed pt-2">
+              <p className="max-w-3xl font-mono-code text-xs md:text-sm text-[#7A7770] leading-relaxed pt-2">
                 A Japanese luxury chocolate retail interior shaped by the aesthetic concept of <span className="text-[#141413] font-medium">Kanso (簡素)</span> — translating brand heritage into tectonic purity and warm timber craftsmanship.
               </p>
             </div>
 
             {/* Project Details Grid (Exact Reference Placement) */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 lg:min-w-[420px] bg-[#FAF8F5] border border-[#E5E3DD] p-6 sm:p-8 rounded-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 bg-[#FAF8F5] border border-[#E5E3DD] p-6 sm:p-8 rounded-sm">
               <div className="space-y-1">
                 <span className="font-mono-code text-[11px] uppercase tracking-widest text-[#9A773E] flex items-center gap-1.5 font-medium">
                   <MapPin className="w-3.5 h-3.5" /> Location
@@ -267,16 +238,6 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
                 </p>
                 <p className="font-mono-code text-xs text-[#7A7770]">Commercial Architecture</p>
               </div>
-
-              <div className="space-y-1 pt-2 sm:pt-0 sm:border-t-0 border-t border-[#E5E3DD]/70">
-                <span className="font-mono-code text-[11px] uppercase tracking-widest text-[#9A773E] flex items-center gap-1.5 font-medium">
-                  <Ruler className="w-3.5 h-3.5" /> Footprint & Scale
-                </span>
-                <p className="font-display text-base sm:text-lg text-[#141413] leading-snug">
-                  30 sq.m (30 m²)
-                </p>
-                <p className="font-mono-code text-xs text-[#7A7770]">Drawing Scale 1:20</p>
-              </div>
             </div>
           </div>
         </header>
@@ -285,10 +246,10 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
       {/* ========================================================================= */}
       {/* 2. PROJECT BRIEF SECTION                                                  */}
       {/* ========================================================================= */}
-      <section className="mt-20 md:mt-28 bg-[#FAF8F5] border-y border-[#E5E3DD] py-16 md:py-24">
+      <section className="mt-20 md:mt-28">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            <div className="lg:col-span-4 space-y-3">
+          <div className="flex flex-col gap-8 md:gap-10 pt-10 md:pt-14 border-t border-[#E5E3DD]">
+            <div className="space-y-3 max-w-4xl">
               <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#9A773E]">
                 <span className="w-2 h-0.5 bg-[#9A773E]" />
                 <span>02 / Project Brief</span>
@@ -296,12 +257,9 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
               <h2 className="font-display font-light text-3xl sm:text-4xl text-[#141413]">
                 Translating Japanese Brand Heritage into Space
               </h2>
-              <p className="font-mono-code text-xs text-[#7A7770] leading-relaxed pt-2">
-                A design exploration in balancing commercial merchandising requirements with contemplative Japanese retail serenity.
-              </p>
             </div>
 
-            <div className="lg:col-span-8 bg-[#FFFFFF] border border-[#E5E3DD] p-8 sm:p-12 rounded-sm shadow-xs relative">
+            <div className="max-w-4xl">
               <div className="space-y-6 text-[#141413]">
                 <p className="font-serif italic text-lg sm:text-xl md:text-2xl leading-relaxed text-[#2C2926]">
                   “The project involved selecting an existing brand and designing a retail interior that reflects its brand identity and existing store features.”
@@ -310,12 +268,6 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
                 <p className="font-display font-light text-base sm:text-lg leading-relaxed text-[#5C5751]">
                   “For this project, ROYCE’, a Japanese luxury chocolate brand, was selected and its visual language and retail characteristics were translated into the interior design.”
                 </p>
-              </div>
-
-              {/* Discreet Japanese Brand Monogram Badge */}
-              <div className="mt-8 pt-6 border-t border-[#E5E3DD] flex flex-wrap items-center justify-between gap-4 font-mono-code text-xs text-[#7A7770]">
-                <span>Brand Origin: Hokkaido, Japan (Est. 1983)</span>
-                <span className="text-[#9A773E] font-medium">Design Studio II · Indus University</span>
               </div>
             </div>
           </div>
@@ -335,9 +287,6 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
             <h2 className="font-display font-light text-4xl sm:text-5xl md:text-6xl text-[#141413]">
               KANSO — Simplicity & Purity
             </h2>
-            <p className="font-serif italic text-lg sm:text-xl text-[#7A7770] mt-2">
-              簡素 (Kanso): The aesthetic elimination of non-essentials to reveal pure essence.
-            </p>
           </div>
 
           <div className="max-w-md">
@@ -366,13 +315,10 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
                   <h3 className="font-display text-lg sm:text-xl text-[#141413] mb-2 leading-tight">
                     {k.title}
                   </h3>
-                  <p className="font-serif italic text-xs text-[#7A7770] mb-3">
+                  <p className="font-serif italic text-xs text-[#7A7770]">
                     {k.subtitle}
                   </p>
                 </div>
-                <p className="font-mono-code text-xs text-[#5C5751] leading-relaxed pt-3 border-t border-[#E5E3DD]/60">
-                  {k.desc}
-                </p>
               </div>
             ))}
           </div>
@@ -394,9 +340,6 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
                 Mood Board & Atmosphere
               </h2>
             </div>
-            <p className="max-w-md font-mono-code text-xs text-[#7A7770] leading-relaxed">
-              Curated from Mahi Patel’s original project study: a dialogue of natural cedar joinery, woven textures, suspended lanterns, and rich cocoa undertones.
-            </p>
           </div>
 
           {/* Large Image Spread of Mood Board from PDF */}
@@ -426,44 +369,6 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
             </div>
           </div>
 
-          {/* Material & Color Palette Swatches */}
-          <div className="mt-12">
-            <div className="flex items-center justify-between mb-6 pb-2 border-b border-[#E5E3DD]">
-              <span className="font-mono-code text-xs uppercase tracking-[0.2em] text-[#9A773E] font-medium">
-                Color Palette & Material Tectonic Palette
-              </span>
-              <span className="font-mono-code text-[11px] text-[#7A7770]">
-                5 Harmonious Hues Extracted from Sheet
-              </span>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-              {COLOR_PALETTE.map((c) => (
-                <div
-                  key={c.hex}
-                  className="group bg-[#FFFFFF] border border-[#E5E3DD] rounded-sm overflow-hidden p-4 hover:border-[#9A773E] hover:shadow-xs transition-all duration-300"
-                >
-                  {/* Color Swatch Block */}
-                  <div
-                    className="w-full h-20 sm:h-24 rounded-xs border border-[#141413]/10 transition-transform duration-300 group-hover:scale-[1.02]"
-                    style={{ backgroundColor: c.hex }}
-                  />
-
-                  <div className="mt-3.5 space-y-1">
-                    <div className="flex items-center justify-between font-mono-code text-[11px]">
-                      <span className="font-semibold text-[#141413]">{c.hex}</span>
-                    </div>
-                    <p className="font-display text-sm text-[#141413] leading-snug">
-                      {c.name}
-                    </p>
-                    <p className="font-mono-code text-[10px] text-[#7A7770] leading-normal pt-1">
-                      {c.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
       </section>
 
@@ -481,15 +386,10 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
               Floor Plan & Spatial Layout
             </h2>
             <p className="font-mono-code text-xs md:text-sm text-[#7A7770] mt-2">
-              Scale 1:20 · Total Retail Footprint: 30 sq.m (30 m²)
+              Scale 1:20
             </p>
           </div>
 
-          <div className="max-w-md">
-            <p className="font-mono-code text-xs text-[#5C5751] leading-relaxed">
-              Circulation flows intuitively from the glazed entrance portal past three stepped Nama chocolate plinths toward the sculptural service counter at the rear.
-            </p>
-          </div>
         </div>
 
         {/* Plan Presentation Block */}
@@ -500,7 +400,7 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
               setLightboxImage({
                 src: '/royce/plan-drawing.png',
                 title: 'ROYCE’ Retail Store Architectural Floor Plan',
-                subtitle: 'Scale 1:20 · Area: 30 sq.m · Sheet 02',
+                subtitle: 'Scale 1:20 · Sheet 02',
               })
             }
             {...viewCursor}
@@ -522,7 +422,7 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
 
             <div className="mt-6 pt-4 border-t border-[#E5E3DD] flex items-center justify-between text-[11px] font-mono-code text-[#7A7770]">
               <span>Drawing 02 · Floor Plan</span>
-              <span className="text-[#9A773E] font-medium">Scale 1:20 · 30 sq.m</span>
+              <span className="text-[#9A773E] font-medium">Scale 1:20</span>
             </div>
           </div>
 
@@ -585,11 +485,6 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
               </ul>
             </div>
 
-            {/* Back of House Note */}
-            <div className="p-5 border border-[#E5E3DD] rounded-sm bg-[#FFFFFF] text-xs font-mono-code text-[#7A7770] space-y-1.5">
-              <span className="text-[#141413] font-medium block">Back-of-House Facilities:</span>
-              <p>Concealed doorway at rear leads to private staff restroom, water basin, and temperature-controlled stock storage.</p>
-            </div>
           </div>
         </div>
       </section>
@@ -614,17 +509,6 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
 
           {/* Elevation Filter Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-            <button
-              onClick={() => setActiveElevationTab('all')}
-              {...linkCursor}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-mono-code transition-all ${
-                activeElevationTab === 'all'
-                  ? 'bg-[#141413] text-[#FFFFFF]'
-                  : 'border border-[#E5E3DD] text-[#7A7770] hover:text-[#141413]'
-              }`}
-            >
-              All (4)
-            </button>
             {ELEVATIONS.map((e) => (
               <button
                 key={e.id}
@@ -644,7 +528,7 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
 
         {/* Stacked / Filtered Elevation Cards */}
         <div className="space-y-12">
-          {ELEVATIONS.filter((e) => activeElevationTab === 'all' || activeElevationTab === e.id).map(
+          {ELEVATIONS.filter((e) => activeElevationTab === e.id).map(
             (elevation, index) => (
               <div
                 key={elevation.id}
@@ -654,7 +538,7 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
                 <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-3 mb-6 pb-4 border-b border-[#E5E3DD]">
                   <div>
                     <span className="font-mono-code text-[11px] uppercase tracking-widest text-[#9A773E] block mb-1">
-                      Elevation Study {String(index + 1).padStart(2, '0')}
+                      Elevation Study {String(ELEVATIONS.indexOf(elevation) + 1).padStart(2, '0')}
                     </span>
                     <h3 className="font-display text-2xl sm:text-3xl text-[#141413] font-light">
                       {elevation.title}
@@ -691,60 +575,9 @@ export const RoyceProjectPage: React.FC<RoyceProjectPageProps> = ({
                     <span className="hidden sm:inline">Inspect Drawing</span>
                   </div>
                 </div>
-
-                {/* Elevation Description & Highlights */}
-                <div className="mt-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-start pt-4 border-t border-[#E5E3DD]/70">
-                  <p className="md:col-span-8 font-mono-code text-xs sm:text-sm text-[#5C5751] leading-relaxed">
-                    {elevation.caption}
-                  </p>
-
-                  <div className="md:col-span-4 flex flex-wrap gap-2">
-                    {elevation.highlights.map((h) => (
-                      <span
-                        key={h}
-                        className="inline-block px-2.5 py-1 rounded-full bg-[#FFFFFF] border border-[#E5E3DD] text-[10px] font-mono-code text-[#7A7770]"
-                      >
-                        {h}
-                      </span>
-                    ))}
-                  </div>
-                </div>
               </div>
             )
           )}
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 7. PROJECT TAKEAWAY SECTION                                               */}
-      {/* ========================================================================= */}
-      <section className="mt-24 md:mt-36 bg-[#141413] text-[#FFFFFF] py-20 md:py-28 px-6 md:px-12 relative overflow-hidden">
-        {/* Subtle decorative grid/line background */}
-        <div className="absolute inset-0 opacity-5 pointer-events-none">
-          <div className="w-full h-full bg-[radial-gradient(#FFFFFF_1px,transparent_1px)] [background-size:24px_24px]" />
-        </div>
-
-        <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
-          <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-[0.25em] text-[#9A773E]">
-            <span className="w-2 h-0.5 bg-[#9A773E]" />
-            <span>07 / Project Takeaway</span>
-            <span className="w-2 h-0.5 bg-[#9A773E]" />
-          </div>
-
-          <h2 className="font-display font-light text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-[#FFFFFF] max-w-3xl mx-auto">
-            “The design translates ROYCE’s existing brand identity into a minimal, warm and refined retail environment, allowing the products and spatial experience to remain the primary focus.”
-          </h2>
-
-          <div className="w-16 h-px bg-[#9A773E] mx-auto pt-2" />
-
-          <div className="pt-4 space-y-2">
-            <p className="font-mono-code text-xs tracking-widest uppercase text-[#9A773E] font-medium">
-              Mahi Patel — Interior & Spatial Architecture
-            </p>
-            <p className="font-mono-code text-[11px] text-[#A09E96]">
-              Design Studio II · Indus University · Bodakdev, Ahmedabad
-            </p>
-          </div>
         </div>
       </section>
 

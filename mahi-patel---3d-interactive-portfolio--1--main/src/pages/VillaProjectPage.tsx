@@ -20,39 +20,6 @@ interface VillaProjectPageProps {
   onCursorChange?: (state: CursorState, text?: string) => void;
 }
 
-// Material palette sampled directly from the rendered villa sheets
-const MATERIAL_PALETTE = [
-  {
-    name: 'White Statuario Marble',
-    hex: '#E6E6E6',
-    description: 'Continuous ground floor flooring through living, dining & circulation',
-  },
-  {
-    name: 'Blush Ceramic Tile',
-    hex: '#E9D7D0',
-    description: 'Feature wall cladding in the first floor bathrooms',
-  },
-  {
-    name: 'Natural Oak Veneer',
-    hex: '#BC9069',
-    description: 'Kitchen tall units, wall paneling & bedroom joinery',
-  },
-  {
-    name: 'Walnut Timber',
-    hex: '#845434',
-    description: 'Entrance deck, dining table & fluted headboard panels',
-  },
-  {
-    name: 'Sage Green Tile',
-    hex: '#818F7C',
-    description: 'Ground floor wet areas & accent upholstery',
-  },
-  {
-    name: 'Nero Marquina Stone',
-    hex: '#3E3E3E',
-    description: 'Staircase treads, kitchen counter & dark accent reveals',
-  },
-];
 
 interface PlanZone {
   marker: string;
@@ -78,7 +45,7 @@ const FLOOR_PLANS: Drawing[] = [
     title: 'Ground Floor Plan — Furniture Layout',
     shortTitle: 'Ground Floor',
     sheet: '13',
-    src: '/projects/villa/01-ground-floor-plan.jpg',
+    src: '/projects/villa/01-ground-floor-plan.jpg?v=2',
     caption:
       'The public level of the house. Kitchen, dining and living run as one open marble-floored volume beside the staircase, with a guest bedroom and wet areas along the west edge. A timber deck and covered car porch form the entrance, set within a landscaped garden with a lily pond and shaded seating.',
     highlights: ['Open kitchen–dining–living', 'Guest bedroom', 'Car porch & timber deck', 'Landscaped garden & pond'],
@@ -95,7 +62,7 @@ const FLOOR_PLANS: Drawing[] = [
     title: 'First Floor Plan — Furniture Layout',
     shortTitle: 'First Floor',
     sheet: '14',
-    src: '/projects/villa/02-first-floor-plan.jpg',
+    src: '/projects/villa/02-first-floor-plan.jpg?v=2',
     caption:
       'The private level. Two bedroom suites sit at either end of the plan, linked by a family lounge at the top of the stair. Each bedroom has its own bathroom and dressing storage, keeping the upper floor quiet and self-contained.',
     highlights: ['Two bedroom suites', 'Family lounge', 'Attached bathrooms', 'Dressing & wardrobe walls'],
@@ -115,7 +82,7 @@ const SECTIONS: Drawing[] = [
     title: 'Section AA’ — Living, Dining & Bedrooms',
     shortTitle: 'Section AA’',
     sheet: '15',
-    src: '/projects/villa/03-section-aa.jpg',
+    src: '/projects/villa/03-section-aa.jpg?v=2',
     caption:
       'A longitudinal cut through the main rooms. At ground level the living room’s sculptural wall art leads to the dining area under pendant lights and the curtained guest bedroom. Above, a bedroom opens onto a balcony, followed by the brick-walled lounge and a bedroom with an arched feature wallpaper.',
     highlights: ['Sculptural living wall art', 'Pendant-lit dining', 'Balcony bedroom', 'Arched wallpaper niche'],
@@ -125,7 +92,7 @@ const SECTIONS: Drawing[] = [
     title: 'Section BB’ — Kitchen, Staircase & Bathrooms',
     shortTitle: 'Section BB’',
     sheet: '16',
-    src: '/projects/villa/04-section-bb.jpg',
+    src: '/projects/villa/04-section-bb.jpg?v=2',
     caption:
       'A cross-section through the service core. The kitchen shows grey and oak cabinetry with a black chimney hood, next to the black-marble staircase and a brick-clad wall. Above, the bathroom pairs blush wall tiles with a fluted vanity and an arched mirror. The car porch sits to the right.',
     highlights: ['Kitchen cabinetry elevation', 'Black marble staircase', 'Fluted vanity & arched mirror', 'Car porch'],
@@ -135,7 +102,7 @@ const SECTIONS: Drawing[] = [
     title: 'Section CC’ — Bedroom & Kitchen Elevations',
     shortTitle: 'Section CC’',
     sheet: '17',
-    src: '/projects/villa/05-section-cc.jpg',
+    src: '/projects/villa/05-section-cc.jpg?v=2',
     caption:
       'A cut showing the guest bedroom headboard wall: fluted walnut panels, terracotta tiles and brass pendant lights, followed by the kitchen’s tall units and refrigerator. Upstairs, a bedroom with a green upholstered day-bed sits beside full-height sliding glass, next to the blush-tiled bathroom.',
     highlights: ['Fluted walnut headboard wall', 'Brass bedside pendants', 'Kitchen tall units', 'Sliding glass & day-bed'],
@@ -145,7 +112,7 @@ const SECTIONS: Drawing[] = [
     title: 'Section DD’ — Entrance, Swing Lounge & Bedroom',
     shortTitle: 'Section DD’',
     sheet: '18',
-    src: '/projects/villa/06-section-dd.jpg',
+    src: '/projects/villa/06-section-dd.jpg?v=2',
     caption:
       'A cut through the front of the house. At ground level a fluted walnut entrance door sits against a whitewashed brick wall, opening into a double-glazed lounge with a timber swing hung from the ceiling. Above, the bathroom’s white stack-bond tiles and wire-frame vanity sit beside a bedroom with a striped day-bed and twisted pendant lights. The landscaped courtyard sits to the right.',
     highlights: ['Fluted walnut entrance door', 'Hanging timber swing', 'Striped day-bed & pendants', 'Courtyard planting'],
@@ -159,7 +126,7 @@ const INTERIOR_VIEWS: Drawing[] = [
     title: 'Bedroom 1 — Plan & Elevations',
     shortTitle: 'Bedroom 1',
     sheet: '19',
-    src: '/projects/villa/07-bedroom-1.jpg',
+    src: '/projects/villa/07-bedroom-1.jpg?v=2',
     caption:
       'A sage-green bedroom drawn in plan and four elevations. The bed sits under an arched niche of patterned wallpaper, with a green upholstered headboard and walnut side tables. The other walls hold a window seat, a TV and dressing wall with a sculptural mirror panel, and a wardrobe with arched oak-and-white shutters.',
     highlights: ['Arched wallpaper niche', 'Green upholstered headboard', 'Arched wardrobe shutters', 'Dressing & TV wall'],
@@ -169,7 +136,7 @@ const INTERIOR_VIEWS: Drawing[] = [
     title: 'Bedroom 2 — Folding Elevation',
     shortTitle: 'Bedroom 2',
     sheet: '21',
-    src: '/projects/villa/08-bedroom-2.jpg',
+    src: '/projects/villa/08-bedroom-2.jpg?v=2',
     caption:
       'The four walls of the second bedroom unfolded around a terrazzo-floored plan. A walnut wardrobe with cream inlays, a dressing unit with a full-length mirror and abstract art, and a curtained window lead to the headboard wall: fluted walnut panels, terracotta tiles and brass bedside lights.',
     highlights: ['Folding elevation', 'Walnut wardrobe', 'Fluted headboard & terracotta tiles', 'Terrazzo flooring'],
@@ -179,7 +146,7 @@ const INTERIOR_VIEWS: Drawing[] = [
     title: 'Bathroom — Plan & Elevations',
     shortTitle: 'Bathroom',
     sheet: '20',
-    src: '/projects/villa/09-bathroom.jpg',
+    src: '/projects/villa/09-bathroom.jpg?v=2',
     caption:
       'A compact bathroom finished in blush ceramic tiles and oak. A fluted vanity with a vessel basin sits under a tall arched mirror, with brushed-brass fittings throughout. A glass partition separates the shower, and a terrazzo floor marks the wet zone in plan.',
     highlights: ['Blush ceramic tiles', 'Fluted vanity & arched mirror', 'Brass fittings', 'Terrazzo wet zone'],
@@ -189,7 +156,7 @@ const INTERIOR_VIEWS: Drawing[] = [
     title: 'Kitchen — Plan & Sections',
     shortTitle: 'Kitchen',
     sheet: '22',
-    src: '/projects/villa/10-kitchen.jpg',
+    src: '/projects/villa/10-kitchen.jpg?v=2',
     caption:
       'A parallel kitchen in grey and natural oak, drawn in plan and four sections. The cooking wall pairs a black chimney hood with fluted-glass wall cabinets, while the opposite run holds the tall oak units, a built-in oven and the refrigerator. A fluted-glass sliding door closes the utility area.',
     highlights: ['Parallel layout', 'Grey & oak cabinetry', 'Chimney hood & hob', 'Tall units & refrigerator'],
@@ -202,7 +169,7 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
   onOpenProject,
   onCursorChange,
 }) => {
-  const [activeSectionTab, setActiveSectionTab] = useState<string>('all');
+  const [activeSectionTab, setActiveSectionTab] = useState<string>(SECTIONS[0].id);
   const [lightboxImage, setLightboxImage] = useState<{ src: string; title: string; subtitle?: string } | null>(null);
 
   // Close lightbox on Escape key
@@ -299,24 +266,6 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
           <span className="hidden sm:inline">Inspect Drawing</span>
         </div>
       </div>
-
-      {/* Description & Highlights */}
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-start pt-4 border-t border-[#E5E3DD]/70">
-        <p className="md:col-span-8 font-mono-code text-xs sm:text-sm text-[#5C5751] leading-relaxed">
-          {d.caption}
-        </p>
-
-        <div className="md:col-span-4 flex flex-wrap gap-2">
-          {d.highlights.map((h) => (
-            <span
-              key={h}
-              className="inline-block px-2.5 py-1 rounded-full bg-[#FFFFFF] border border-[#E5E3DD] text-[10px] font-mono-code text-[#7A7770]"
-            >
-              {h}
-            </span>
-          ))}
-        </div>
-      </div>
     </div>
   );
 
@@ -358,7 +307,7 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
       {/* ========================================================================= */}
       <section className="max-w-7xl mx-auto px-6 md:px-12">
         <header className="pb-10 md:pb-14">
-          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-10">
+          <div className="flex flex-col gap-10 md:gap-12">
             {/* Title Block */}
             <div className="space-y-3">
               <h1 className="font-display font-light text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight text-[#141413] leading-[0.92]">
@@ -367,13 +316,13 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
               <p className="font-serif italic text-lg sm:text-xl md:text-2xl text-[#9A773E] tracking-wide">
                 Residential Interior Design
               </p>
-              <p className="max-w-xl font-mono-code text-xs md:text-sm text-[#7A7770] leading-relaxed pt-2">
+              <p className="max-w-3xl font-mono-code text-xs md:text-sm text-[#7A7770] leading-relaxed pt-2">
                 A two-storey family residence set in a landscaped garden — resolved through <span className="text-[#141413] font-medium">rendered furniture layouts and interior sections</span> that carry a warm palette of marble, oak and walnut through every room.
               </p>
             </div>
 
             {/* Project Details Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 lg:min-w-[420px] bg-[#FAF8F5] border border-[#E5E3DD] p-6 sm:p-8 rounded-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 bg-[#FAF8F5] border border-[#E5E3DD] p-6 sm:p-8 rounded-sm">
               <div className="space-y-1">
                 <span className="font-mono-code text-[11px] uppercase tracking-widest text-[#9A773E] flex items-center gap-1.5 font-medium">
                   <Home className="w-3.5 h-3.5" /> Typology
@@ -421,10 +370,10 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
       {/* ========================================================================= */}
       {/* 2. PROJECT BRIEF SECTION                                                  */}
       {/* ========================================================================= */}
-      <section className="mt-20 md:mt-28 bg-[#FAF8F5] border-y border-[#E5E3DD] py-16 md:py-24">
+      <section className="mt-20 md:mt-28">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            <div className="lg:col-span-4 space-y-3">
+          <div className="flex flex-col gap-8 md:gap-10 pt-10 md:pt-14 border-t border-[#E5E3DD]">
+            <div className="space-y-3 max-w-4xl">
               <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#9A773E]">
                 <span className="w-2 h-0.5 bg-[#9A773E]" />
                 <span>02 / Project Brief</span>
@@ -432,12 +381,9 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
               <h2 className="font-display font-light text-3xl sm:text-4xl text-[#141413]">
                 A Home Organised from Public to Private
               </h2>
-              <p className="font-mono-code text-xs text-[#7A7770] leading-relaxed pt-2">
-                A complete residential interior, drawn from furniture layout down to the finish of each wall.
-              </p>
             </div>
 
-            <div className="lg:col-span-8 bg-[#FFFFFF] border border-[#E5E3DD] p-8 sm:p-12 rounded-sm shadow-xs relative">
+            <div className="max-w-4xl">
               <div className="space-y-6 text-[#141413]">
                 <p className="font-serif italic text-lg sm:text-xl md:text-2xl leading-relaxed text-[#2C2926]">
                   The ground floor gathers the family — kitchen, dining and living flow into one open space that opens onto the garden.
@@ -447,68 +393,7 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
                   The first floor is kept for rest: two bedroom suites with their own bathrooms, connected by a family lounge at the top of the stair. Sections through every room record the wall finishes, joinery and lighting of each space.
                 </p>
               </div>
-
-              <div className="mt-8 pt-6 border-t border-[#E5E3DD] flex flex-wrap items-center justify-between gap-4 font-mono-code text-xs text-[#7A7770]">
-                <span>Drawing Set: Plans, Sections & Room Studies · Sheets 13–22</span>
-                <span className="text-[#9A773E] font-medium">CAD IV · Indus University</span>
-              </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 3. MATERIAL PALETTE                                                       */}
-      {/* ========================================================================= */}
-      <section className="mt-16 md:mt-24 max-w-7xl mx-auto px-6 md:px-12">
-        <div className="bg-[#FAF8F5] border border-[#E5E3DD] p-6 sm:p-10 md:p-14 rounded-sm">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#E5E3DD]">
-            <div>
-              <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#9A773E] mb-2">
-                <span className="w-2 h-0.5 bg-[#9A773E]" />
-                <span>03 / Material Language</span>
-              </div>
-              <h2 className="font-display font-light text-3xl sm:text-4xl md:text-5xl text-[#141413]">
-                Material & Colour Palette
-              </h2>
-            </div>
-            <p className="max-w-md font-mono-code text-xs text-[#7A7770] leading-relaxed">
-              Pale marble floors set a calm base, warmed by oak and walnut joinery, with blush and sage tiles giving each wet area its own character.
-            </p>
-          </div>
-
-          <div className="flex items-center justify-between mb-6 pb-2 border-b border-[#E5E3DD]">
-            <span className="font-mono-code text-xs uppercase tracking-[0.2em] text-[#9A773E] font-medium">
-              Finishes Across the Residence
-            </span>
-            <span className="font-mono-code text-[11px] text-[#7A7770]">
-              6 Tones Sampled from the Sheets
-            </span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-6 gap-4">
-            {MATERIAL_PALETTE.map((c) => (
-              <div
-                key={c.hex}
-                className="group bg-[#FFFFFF] border border-[#E5E3DD] rounded-sm overflow-hidden p-4 hover:border-[#9A773E] hover:shadow-xs transition-all duration-300"
-              >
-                <div
-                  className="w-full h-20 sm:h-24 rounded-xs border border-[#141413]/10 transition-transform duration-300 group-hover:scale-[1.02]"
-                  style={{ backgroundColor: c.hex }}
-                />
-                <div className="mt-3.5 space-y-1">
-                  <div className="flex items-center justify-between font-mono-code text-[11px]">
-                    <span className="font-semibold text-[#141413]">{c.hex}</span>
-                  </div>
-                  <p className="font-display text-sm text-[#141413] leading-snug">
-                    {c.name}
-                  </p>
-                  <p className="font-mono-code text-[10px] text-[#7A7770] leading-normal pt-1">
-                    {c.description}
-                  </p>
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -521,7 +406,7 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
           <div>
             <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#9A773E] mb-2">
               <span className="w-2 h-0.5 bg-[#9A773E]" />
-              <span>04 / Spatial Layout & Drawings</span>
+              <span>03 / Spatial Layout & Drawings</span>
             </div>
             <h2 className="font-display font-light text-4xl sm:text-5xl md:text-6xl text-[#141413]">
               Floor Plans
@@ -531,11 +416,6 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
             </p>
           </div>
 
-          <div className="max-w-md">
-            <p className="font-mono-code text-xs text-[#5C5751] leading-relaxed">
-              Living spaces gather on the ground floor around the central staircase; the bedrooms rise above it, each with its own bathroom.
-            </p>
-          </div>
         </div>
 
         <div className="space-y-16">
@@ -573,9 +453,6 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
                   <span className="font-mono-code text-xs uppercase tracking-widest text-[#9A773E] block mb-3 font-medium">
                     {plan.shortTitle} · Spatial Zones
                   </span>
-                  <p className="font-mono-code text-xs text-[#7A7770] leading-relaxed mb-4">
-                    {plan.caption}
-                  </p>
 
                   <ul className="space-y-3 font-mono-code text-xs text-[#141413]">
                     {plan.zones?.map((z, zi) => (
@@ -610,7 +487,7 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
           <div>
             <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#9A773E] mb-2">
               <span className="w-2 h-0.5 bg-[#9A773E]" />
-              <span>05 / Interior Sections</span>
+              <span>04 / Interior Sections</span>
             </div>
             <h2 className="font-display font-light text-4xl sm:text-5xl md:text-6xl text-[#141413]">
               Sectional Studies
@@ -622,17 +499,6 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
 
           {/* Section Filter Tabs */}
           <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-            <button
-              onClick={() => setActiveSectionTab('all')}
-              {...linkCursor}
-              className={`px-3.5 py-1.5 rounded-full text-xs font-mono-code transition-all ${
-                activeSectionTab === 'all'
-                  ? 'bg-[#141413] text-[#FFFFFF]'
-                  : 'border border-[#E5E3DD] text-[#7A7770] hover:text-[#141413]'
-              }`}
-            >
-              All ({SECTIONS.length})
-            </button>
             {SECTIONS.map((s) => (
               <button
                 key={s.id}
@@ -651,7 +517,7 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
         </div>
 
         <div className="space-y-12">
-          {SECTIONS.filter((s) => activeSectionTab === 'all' || activeSectionTab === s.id).map((s) =>
+          {SECTIONS.filter((s) => activeSectionTab === s.id).map((s) =>
             renderDrawingCard(
               s,
               `Section Study ${String(SECTIONS.indexOf(s) + 1).padStart(2, '0')}`,
@@ -670,7 +536,7 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
             <div>
               <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#9A773E] mb-2">
                 <span className="w-2 h-0.5 bg-[#9A773E]" />
-                <span>06 / Room Interiors</span>
+                <span>05 / Room Interiors</span>
               </div>
               <h2 className="font-display font-light text-4xl sm:text-5xl md:text-6xl text-[#141413]">
                 Room Studies
@@ -688,38 +554,6 @@ export const VillaProjectPage: React.FC<VillaProjectPageProps> = ({
           </div>
         </section>
       )}
-
-      {/* ========================================================================= */}
-      {/* 7. PROJECT TAKEAWAY SECTION                                               */}
-      {/* ========================================================================= */}
-      <section className="mt-24 md:mt-36 bg-[#141413] text-[#FFFFFF] py-20 md:py-28 px-6 md:px-12 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5 pointer-events-none">
-          <div className="w-full h-full bg-[radial-gradient(#FFFFFF_1px,transparent_1px)] [background-size:24px_24px]" />
-        </div>
-
-        <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
-          <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-[0.25em] text-[#9A773E]">
-            <span className="w-2 h-0.5 bg-[#9A773E]" />
-            <span>{INTERIOR_VIEWS.length > 0 ? '07' : '06'} / Project Takeaway</span>
-            <span className="w-2 h-0.5 bg-[#9A773E]" />
-          </div>
-
-          <h2 className="font-display font-light text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight text-[#FFFFFF] max-w-3xl mx-auto">
-            An open, light-filled family level below and calm private suites above — tied together by one consistent palette of marble, oak and walnut.
-          </h2>
-
-          <div className="w-16 h-px bg-[#9A773E] mx-auto pt-2" />
-
-          <div className="pt-4 space-y-2">
-            <p className="font-mono-code text-xs tracking-widest uppercase text-[#9A773E] font-medium">
-              Mahi Patel — Interior & Spatial Architecture
-            </p>
-            <p className="font-mono-code text-[11px] text-[#A09E96]">
-              CAD IV · IDS, Indus University
-            </p>
-          </div>
-        </div>
-      </section>
 
       {/* ========================================================================= */}
       {/* 8. PROJECT-TO-PROJECT NAVIGATION                                          */}

@@ -84,30 +84,6 @@ export const Navbar: React.FC<NavbarProps> = ({
               onMouseLeave={() => onCursorChange?.('default')}
               className="group flex items-center gap-3 text-left"
             >
-              {/* Architectural Spatial Monogram / Isometric Mark */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 0.18, duration: 0.35, ease: 'easeOut' }}
-                className="relative shrink-0 w-9 h-9 rounded-sm border border-[#141413]/25 bg-[#F8F8F6] flex items-center justify-center transition-all duration-300 group-hover:border-[#9A773E] group-hover:bg-[#FFFFFF] group-hover:shadow-sm"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  className="w-5 h-5 text-[#141413] group-hover:text-[#9A773E] transition-colors duration-300"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 2.5L20.5 7.5V16.5L12 21.5L3.5 16.5V7.5L12 2.5Z" />
-                  <path d="M12 12V21.5" />
-                  <path d="M12 12L20.5 7.5" />
-                  <path d="M12 12L3.5 7.5" />
-                </svg>
-                <span className="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-[#9A773E] ring-2 ring-[#FFFFFF]" />
-              </motion.div>
-
               <div className="min-w-0">
                 <div className="flex items-center gap-2">
                   <motion.span

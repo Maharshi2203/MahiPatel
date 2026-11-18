@@ -11,7 +11,6 @@ import {
   MapPin,
   Tag,
   Building2,
-  Ruler,
   Clock,
   ExternalLink,
   BookOpen,
@@ -28,39 +27,6 @@ interface UrbenHatchProjectPageProps {
 
 const EASE = [0.76, 0, 0.24, 1] as const;
 
-// 6-Swatch Palette extracted directly from Mahi Patel's Urben Hatch Presentation Sheets
-const COLOR_PALETTE = [
-  {
-    name: 'Historic Terracotta Brick & Jaali',
-    hex: '#B35446',
-    description: 'Restored colonial masonry, exterior pilasters & contemporary perforated jaali acoustic screens',
-  },
-  {
-    name: 'Architectural Crimson Steel',
-    hex: '#C83E34',
-    description: 'Sculptural central staircase, elevated catwalk bridges, steel stringers & balustrade framing',
-  },
-  {
-    name: 'Polished Peach Terrazzo',
-    hex: '#E6BAA3',
-    description: 'Cast-in-place ground and atrium flooring with fine marble aggregate & brass control joints',
-  },
-  {
-    name: 'Natural Fluted White Oak',
-    hex: '#C49A6C',
-    description: 'Mezzanine ladders, under-stair luggage joinery, study desks & stepped gathering podiums',
-  },
-  {
-    name: 'Warm Ivory Lime Wash',
-    hex: '#F4EFE6',
-    description: 'Traditional breathable mineral wall plaster diffusing soft natural courtyard illumination',
-  },
-  {
-    name: 'Matte Graphite & Steel Mesh',
-    hex: '#2E3033',
-    description: 'Minimalist window fenestration, lighting track armatures & mezzanine safety screens',
-  },
-];
 
 // The 5 core spatial design principles of the adaptive reuse intervention
 const DESIGN_PRINCIPLES = [
@@ -96,133 +62,87 @@ const DESIGN_PRINCIPLES = [
   },
 ];
 
-// Architectural drawings and technical documentation
+// Architectural presentation sheets and technical documentation in official project sequence (01 to 07)
 const TECHNICAL_DRAWINGS = [
   {
-    id: 'section-aa',
-    category: 'drawings',
-    title: 'Longitudinal Section AA’ — Roof Trusses & Courtyards',
-    scale: '1:100',
-    src: '/projects/urben-hatch/05-architectural-section-aa.png',
+    id: 'sheet-01-concept',
+    number: '01',
+    category: 'plans',
+    title: 'Sheet 01 · URBEN HATCH — Hospitality Design & Adaptive Reuse Concept',
+    scale: 'Concept & Macro Analysis',
+    src: '/projects/urben-hatch/sheet-01-concept.jpg',
     caption:
-      'Full architectural longitudinal section AA’ cutting through the central double-height atrium, original timber roof trusses, internal open courtyards, and vertical circulation bridges.',
-    highlights: ['Timber roof truss preservation', 'Double-height volume dynamics', 'Courtyard microclimate cross-ventilation', 'Bridge insertions'],
+      'Introductory concept sheet for Urben Hatch: historic R.C. High School of Commerce context in Old City Ahmedabad, hostel hotel typology, adaptive reuse design objectives, light analysis, major axial corridors, layout zoning, and functional connectivity between public, service, and guest accommodations.',
+    highlights: ['Old City Ahmedabad Context', 'Hostel Hotel Typology', 'Light & Solar Analysis', 'Bubble Connectivity Matrix'],
   },
   {
-    id: 'sections-bb-cc',
-    category: 'drawings',
-    title: 'Transverse Sections BB’ & CC’ — Minaret Tower & Wing Spatial Hierarchy',
-    scale: '1:100',
-    src: '/projects/urben-hatch/06-sections-bb-cc.png',
-    caption:
-      'Comparative transverse sections illustrating structural relationship between the heritage clock tower minaret, dormitory wings, and colonnaded circulation loggias.',
-    highlights: ['Minaret tower integration', 'Classroom mezzanine height studies', 'Ground-to-first floor circulation', 'Perimeter arcade loggias'],
-  },
-  {
-    id: 'floor-plans',
-    category: 'drawings',
-    title: 'Comparative Floor Plans — Ground Public Hub & First Floor Accommodations',
+    id: 'sheet-02-ground-floor-plan',
+    number: '02',
+    category: 'plans',
+    title: 'Sheet 02 · Ground Floor Plan (1:250) — Public Hospitality Core',
     scale: '1:250',
-    src: '/projects/urben-hatch/07-ground-first-floor-plans.png',
+    src: '/projects/urben-hatch/sheet-02-ground-floor-plan.jpg',
     caption:
-      'Complete 1:250 spatial layout comparing Ground Floor public amenities (reception, co-working hub, cafe, exhibition atrium, indoor games) with First Floor guestrooms (single, double, 4-bed & 6-bed dormitories).',
-    highlights: ['Ground floor public activation', 'Upper floor room typology zoning', 'Axial circulation paths', 'Clear service & guest separation'],
+      'Detailed 1:250 Ground Floor Plan with compass orientation, section cutlines AA’, BB’, CC’ and 9-zone functional legend: 1. Sitting Area, 2. Game Room, 3. Co-Working Area, 4. Reception + Lounge, 5. Conference Room, 6. Housekeeping, 7. Kitchen, 8. Staff Room, 9. Cafe.',
+    highlights: ['1:250 Scale Plan', '9-Zone Program Schedule', 'Section Cutlines AA’, BB’, CC’', 'Courtyard & Entry Axis'],
   },
   {
-    id: 'cafe-plan',
-    category: 'drawings',
-    title: 'Atrium Cafe & Communal Hub Detailed Layout',
-    scale: '1:50',
-    src: '/projects/urben-hatch/13-cafe-atrium-plan.png',
+    id: 'sheet-03-first-floor-plan',
+    number: '03',
+    category: 'plans',
+    title: 'Sheet 03 · First Floor Plan (1:250) — Accommodations & Dormitories',
+    scale: '1:250',
+    src: '/projects/urben-hatch/sheet-03-first-floor-plan.jpg',
     caption:
-      'Detailed 1:50 architectural plan and material schedule of the ground-floor cafe, showing custom circular dining banquettes, built-in planter partitions, service bar, and courtyard spill-out.',
-    highlights: ['Circular booth joinery', 'Terrazzo dining surfaces', 'Integrated biophilic planters', 'Seamless threshold to atrium'],
+      'Detailed 1:250 accommodations plan mapping room typologies along arcaded corridors: 1. Single Room, 2. Double Room, 3. 4-Sharing Dormitory, and 4. 6-Sharing Dormitory.',
+    highlights: ['1:250 Accommodations Plan', 'Single & Double Suites', '4-Share & 6-Share Dorms', 'Arcaded Circulation'],
   },
   {
-    id: 'single-suite-drawings',
-    category: 'drawings',
-    title: 'Single Room Suite — Architectural Plan, Section & Spec Sheet',
-    scale: '1:25',
-    src: '/projects/urben-hatch/11-single-room-suite.png',
+    id: 'sheet-04-sections',
+    number: '04',
+    category: 'plans',
+    title: 'Sheet 04 · Architectural Sections (1:250) — AA’, BB’ & CC’',
+    scale: '1:250',
+    src: '/projects/urben-hatch/sheet-04-sections.jpg',
     caption:
-      'Technical 1:25 drawing sheet featuring single room suite layout, section elevation, bespoke furniture dimensions, striped wallpaper accent, and material finishes.',
-    highlights: ['1:25 detailed plan & section', 'Integrated wardrobe joinery', 'Ergonomic study nook', 'Compact ensuite layout'],
+      'Three measured architectural sections at 1:250: Section AA’ cuts through the central double-height volume and timber roof trusses; Section BB’ through the clock tower minaret and arcade wing; Section CC’ through the open courtyard and circulation staircase.',
+    highlights: ['Section AA’ Longitudinal', 'Section BB’ Minaret Tower', 'Section CC’ Courtyard Axis', 'Scale 1:250'],
   },
   {
-    id: 'double-suite-drawings',
-    category: 'drawings',
-    title: 'Double Room Suite — Layout Plan & Material Palette Spec',
-    scale: '1:25',
-    src: '/projects/urben-hatch/12-double-room-suite.png',
+    id: 'sheet-05-reception',
+    number: '05',
+    category: 'suites',
+    title: 'Sheet 05 · Reception & Central Atrium — Multi-Level Plans & 3D Perspectives',
+    scale: 'Multi-Level Plans & 3D',
+    src: '/projects/urben-hatch/sheet-05-reception.jpg',
     caption:
-      'Comprehensive 1:25 plan and specification sheet for double occupancy guestroom suite, pairing dark-stained oak cabinetry with patterned terrazzo floors and matte black hardware.',
-    highlights: ['Generous double layout', 'Luggage stowage optimization', 'Material sample schedule', 'Ambient lighting integration'],
+      'Three-level spatial plans at 2300 mm, 4700 mm, and 6200 mm, paired with four interior 3D renders capturing the sculptural crimson steel staircase, suspended pedestrian bridges, and the double-height reception atrium.',
+    highlights: ['Plans at 2300, 4700, 6200 mm', 'Crimson Steel Staircase', 'Double-Height Void', 'Heritage Arcades'],
   },
   {
-    id: 'urban-site-analysis',
-    category: 'analysis',
-    title: 'Old City Ahmedabad Urban Site Context & SWOT Analysis',
-    scale: 'Urban Scale',
-    src: '/projects/urben-hatch/09-urban-site-analysis.png',
+    id: 'sheet-06-double-room',
+    number: '06',
+    category: 'suites',
+    title: 'Sheet 06 · Double Room Suite (1:25) — Plan, Material Palette & 3D Views',
+    scale: '1:25 & 3D Renders',
+    src: '/projects/urben-hatch/sheet-06-double-room.jpg',
     caption:
-      'Urban context analysis within the historic Gheekanta district of Old City Ahmedabad, examining proximity to Bhadra Fort, Teen Darwaza, pedestrian pol networks, sun path angles, and accessibility.',
-    highlights: ['UNESCO World Heritage pol context', 'Pedestrian & transit connectivity', 'Microclimate & solar orientation', 'Comprehensive SWOT breakdown'],
+      '1:25 measured plan, material specifications (black metal with warm accents, dark-stained wood, inlay terrazzo flooring, textured textiles), and two 3D perspective renders showing the cantilever orange stairs, lower lounge, and upper mezzanine sleeping loft.',
+    highlights: ['1:25 Layout Plan', 'Material Sample Palette', 'Orange Cantilever Stair', 'Mezzanine Loft Bed'],
   },
   {
-    id: 'concept-zoning',
-    category: 'analysis',
-    title: 'Concept Framework, Arch Typologies & Spatial Flow Diagram',
-    scale: 'Diagrammatic',
-    src: '/projects/urben-hatch/08-concept-programme-zoning.png',
+    id: 'sheet-07-single-room',
+    number: '07',
+    category: 'suites',
+    title: 'Sheet 07 · Single Room Suite (1:25) — Plan, Material Palette & 3D Views',
+    scale: '1:25 & 3D Renders',
+    src: '/projects/urben-hatch/sheet-07-single-room.jpg',
     caption:
-      'Morphological study of architectural arch typologies (horseshoe, segmental, and centred arches) and the programmatic zoning matrix linking public, semi-public, and private hospitality sectors.',
-    highlights: ['Heritage arch morphology', 'Connectivity & programmatic flow', 'User journey mapping', 'Spatial density matrix'],
+      '1:25 measured layout plan, material schedule (accent panel, striped wallpaper, linen, brass arc floor lamp), and two 3D perspective views featuring the custom crimson plinth bed and "Hey Love" illuminated artwork.',
+    highlights: ['1:25 Layout Plan', 'Material Sample Moodboard', 'Crimson Bed Plinth', 'Striped Graphic Accent'],
   },
 ];
 
-// Interior 3D Renders & Perspectives
-const PERSPECTIVES = [
-  {
-    id: 'mezzanine-hero',
-    title: 'Mezzanine Guestroom Suite — Floating Orange Stair & Lounge',
-    src: '/projects/urben-hatch/01-mezzanine-room-stairs.png',
-    caption:
-      'Hero perspective of the high-ceilinged guestroom suite: a custom bright orange cantilevered steel stair leads to an upper sleeping loft, accompanied by mid-century lounge chairs and warm natural light.',
-    tag: 'Hero Suite Perspective',
-  },
-  {
-    id: 'mezzanine-loft',
-    title: 'Mezzanine Loft Sleeping Pod & Perforated Timber Railing',
-    src: '/projects/urben-hatch/02-mezzanine-bed-interior.png',
-    caption:
-      'View from the elevated sleeping deck featuring a graphic terracotta-and-cream patterned headboard, built-in task sconces, and perforated timber privacy balustrade.',
-    tag: 'Upper Sleeping Deck',
-  },
-  {
-    id: 'atrium-colonnade',
-    title: 'Central Atrium Colonnade — Heritage Arches & Terrazzo Floor',
-    src: '/projects/urben-hatch/03-atrium-hall-colonnade.png',
-    caption:
-      'Double-height central atrium framed by restored colonial brick archways, cast peach terrazzo flooring, contemporary fluted oak benches, and lush indoor planters.',
-    tag: 'Central Colonnade',
-  },
-  {
-    id: 'atrium-jaali',
-    title: 'Atrium Gathering Space & Contemporary Brick Jaali Partition',
-    src: '/projects/urben-hatch/04-atrium-jaali-seating.png',
-    caption:
-      'Stepped amphitheatre seating constructed from solid oak, set against an acoustic perforated terracotta jaali screen wall that filters diffused golden daylight.',
-    tag: 'Amphitheatre Lounge',
-  },
-  {
-    id: 'crimson-stairs-study',
-    title: 'Sculptural Crimson Steel Staircase & Pedestrian Bridge Insertion',
-    src: '/projects/urben-hatch/10-crimson-atrium-stairs.png',
-    caption:
-      'Four-angle architectural study of the bold crimson steel sculptural staircase and suspended pedestrian bridges weaving through the historic atrium.',
-    tag: 'Circulation Core Study',
-  },
-];
 
 export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
   onBack,
@@ -231,7 +151,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
   onCursorChange,
 }) => {
   const reduced = !!useReducedMotion();
-  const [activeTab, setActiveTab] = useState<'all' | 'perspectives' | 'drawings' | 'analysis'>('all');
+  const [activeTab, setActiveTab] = useState<'all' | 'plans' | 'suites'>('all');
   const [lightboxImage, setLightboxImage] = useState<{ src: string; title: string; subtitle?: string } | null>(null);
 
   // Close lightbox on Escape key
@@ -285,11 +205,11 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
     onMouseLeave: () => onCursorChange?.('default'),
   };
 
-  // Filtered technical items
+  // Filtered technical presentation sheets
   const filteredDrawings = TECHNICAL_DRAWINGS.filter((d) => {
     if (activeTab === 'all') return true;
-    if (activeTab === 'drawings') return d.category === 'drawings';
-    if (activeTab === 'analysis') return d.category === 'analysis';
+    if (activeTab === 'plans') return d.category === 'plans';
+    if (activeTab === 'suites') return d.category === 'suites';
     return false;
   });
 
@@ -331,29 +251,24 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
       {/* ========================================================================= */}
       <section className="max-w-7xl mx-auto px-6 md:px-12">
         <header className="pb-10 md:pb-14">
-          <div className="flex flex-col lg:flex-row lg:items-start justify-between gap-10">
+          <div className="flex flex-col gap-10 md:gap-12">
             {/* Title Block */}
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FAF8F5] border border-[#E5E3DD] rounded-full font-mono-code text-[11px] text-[#B35446] uppercase tracking-widest">
-                <span>Design Studio VI · Semester 6</span>
-                <span className="w-1 h-1 rounded-full bg-[#B35446]" />
-                <span>Historic Adaptive Reuse</span>
-              </div>
-              <h1 className="font-display font-light text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-[#141413] leading-[0.95]">
+              <h1 className="font-display font-light text-[11vw] xl:text-9xl tracking-tight text-[#141413] leading-[0.92] whitespace-nowrap">
                 URBEN HATCH
               </h1>
-              <p className="font-serif italic text-lg sm:text-xl md:text-2xl text-[#B35446] tracking-wide">
-                Hostel Hotel · Adaptive Reuse of Historic R.C. High School
+              <p className="font-serif italic text-lg sm:text-xl md:text-2xl text-[#9A773E] tracking-wide">
+                Hospitality Design · Adaptive Reuse
               </p>
-              <p className="max-w-2xl font-mono-code text-xs md:text-sm text-[#7A7770] leading-relaxed pt-2">
+              <p className="max-w-3xl font-mono-code text-xs md:text-sm text-[#7A7770] leading-relaxed pt-2">
                 A sensitive architectural transformation of the colonial-era <span className="text-[#141413] font-medium">R.C. High School of Commerce</span> in Old City Ahmedabad into a vibrant boutique hostel, co-working atrium, and civic hospitality hub for travelers, students, and interns.
               </p>
             </div>
 
             {/* Project Details Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 lg:min-w-[440px] bg-[#FAF8F5] border border-[#E5E3DD] p-6 sm:p-8 rounded-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 bg-[#FAF8F5] border border-[#E5E3DD] p-6 sm:p-8 rounded-sm">
               <div className="space-y-1">
-                <span className="font-mono-code text-[11px] uppercase tracking-widest text-[#B35446] flex items-center gap-1.5 font-medium">
+                <span className="font-mono-code text-[11px] uppercase tracking-widest text-[#9A773E] flex items-center gap-1.5 font-medium">
                   <MapPin className="w-3.5 h-3.5" /> Location
                 </span>
                 <p className="font-display text-base sm:text-lg text-[#141413] leading-snug">
@@ -363,7 +278,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
               </div>
 
               <div className="space-y-1">
-                <span className="font-mono-code text-[11px] uppercase tracking-widest text-[#B35446] flex items-center gap-1.5 font-medium">
+                <span className="font-mono-code text-[11px] uppercase tracking-widest text-[#9A773E] flex items-center gap-1.5 font-medium">
                   <Building2 className="w-3.5 h-3.5" /> Original Building
                 </span>
                 <p className="font-display text-base sm:text-lg text-[#141413] leading-snug">
@@ -373,7 +288,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
               </div>
 
               <div className="space-y-1 pt-2 sm:pt-0 sm:border-t-0 border-t border-[#E5E3DD]/70">
-                <span className="font-mono-code text-[11px] uppercase tracking-widest text-[#B35446] flex items-center gap-1.5 font-medium">
+                <span className="font-mono-code text-[11px] uppercase tracking-widest text-[#9A773E] flex items-center gap-1.5 font-medium">
                   <Tag className="w-3.5 h-3.5" /> Typology & Target
                 </span>
                 <p className="font-display text-base sm:text-lg text-[#141413] leading-snug">
@@ -381,65 +296,18 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
                 </p>
                 <p className="font-mono-code text-xs text-[#7A7770]">Travelers, interns, backpackers</p>
               </div>
-
-              <div className="space-y-1 pt-2 sm:pt-0 sm:border-t-0 border-t border-[#E5E3DD]/70">
-                <span className="font-mono-code text-[11px] uppercase tracking-widest text-[#B35446] flex items-center gap-1.5 font-medium">
-                  <Ruler className="w-3.5 h-3.5" /> Site & Drawing Scales
-                </span>
-                <p className="font-display text-base sm:text-lg text-[#141413] leading-snug">
-                  19,091 m² Site Area
-                </p>
-                <p className="font-mono-code text-xs text-[#7A7770]">Drawings: 1:250 · 1:100 · 1:50 · 1:25</p>
-              </div>
             </div>
           </div>
         </header>
-
-        {/* Hero Visual Banner */}
-        <div className="mt-8 rounded-sm overflow-hidden border border-[#E5E3DD] relative group shadow-sm">
-          <div className="relative aspect-[16/9] md:aspect-[21/9] w-full bg-[#1A1816] overflow-hidden">
-            <img
-              src="/projects/urben-hatch/01-mezzanine-room-stairs.png"
-              alt="URBEN HATCH Mezzanine Guestroom Suite Hero Perspective"
-              className="w-full h-full object-cover object-center group-hover:scale-[1.02] transition-transform duration-700 ease-out"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#141413]/70 via-transparent to-transparent" />
-            <div className="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-white">
-              <div>
-                <span className="font-mono-code text-[10px] tracking-widest uppercase bg-[#C83E34] text-white px-2.5 py-1 rounded-xs">
-                  Hero Interior Perspective
-                </span>
-                <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-light mt-2 text-white">
-                  Mezzanine Guestroom Suite & Custom Orange Cantilever Stair
-                </h3>
-              </div>
-              <button
-                type="button"
-                onClick={() =>
-                  setLightboxImage({
-                    src: '/projects/urben-hatch/01-mezzanine-room-stairs.png',
-                    title: 'Mezzanine Guestroom Suite Hero Perspective',
-                    subtitle: 'Custom orange floating stair, upper sleeping loft & modular joinery',
-                  })
-                }
-                {...linkCursor}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 backdrop-blur-md rounded-full text-xs font-mono-code text-white transition-colors self-start sm:self-auto"
-              >
-                <Maximize2 className="w-3.5 h-3.5" />
-                <span>Expand Fullscreen</span>
-              </button>
-            </div>
-          </div>
-        </div>
       </section>
 
       {/* ========================================================================= */}
       {/* 2. PROJECT STATEMENT & ADAPTIVE REUSE VISION                              */}
       {/* ========================================================================= */}
-      <section className="mt-20 md:mt-28 bg-[#FAF8F5] border-y border-[#E5E3DD] py-16 md:py-24">
+      <section className="mt-20 md:mt-28">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
-            <div className="lg:col-span-4 space-y-3">
+          <div className="flex flex-col gap-8 md:gap-10 pt-10 md:pt-14 border-t border-[#E5E3DD]">
+            <div className="space-y-3 max-w-4xl">
               <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#B35446]">
                 <span className="w-2 h-0.5 bg-[#B35446]" />
                 <span>02 / Project Manifesto</span>
@@ -447,12 +315,9 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
               <h2 className="font-display font-light text-3xl sm:text-4xl text-[#141413] leading-tight">
                 Breathing Youth & Hospitality into Ahmedabad’s Heritage Core
               </h2>
-              <p className="font-mono-code text-xs text-[#7A7770] leading-relaxed pt-2">
-                Preserving architectural dignity while responding to the pressing demand for vibrant, design-led accommodations in historic urban settings.
-              </p>
             </div>
 
-            <div className="lg:col-span-8 bg-[#FFFFFF] border border-[#E5E3DD] p-8 sm:p-12 rounded-sm shadow-xs relative">
+            <div className="max-w-4xl">
               <div className="space-y-6 text-[#141413]">
                 <p className="font-serif italic text-lg sm:text-xl md:text-2xl leading-relaxed text-[#2C2926]">
                   “Urben Hatch reimagines the historic R.C. High School of Commerce not as a static museum relic, but as an active, living infrastructure that bridges Old City heritage with the energetic lifestyle of students, creative interns, and global travelers.”
@@ -461,11 +326,6 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
                 <p className="font-display font-light text-base sm:text-lg leading-relaxed text-[#5C5751]">
                   By utilizing the soaring vertical clearance of colonial classrooms, the design introduces custom mezzanine sleeping pods, perforated brick jaali amphitheaters, and bold crimson circulation bridges. The street-facing ground level dissolves boundaries, opening a civic cafe, co-working commons, and shaded courtyards back to the community.
                 </p>
-              </div>
-
-              <div className="mt-8 pt-6 border-t border-[#E5E3DD] flex flex-wrap items-center justify-between gap-4 font-mono-code text-xs text-[#7A7770]">
-                <span>Typology: Adaptive Reuse / Boutique Hostel & Hotel</span>
-                <span className="text-[#B35446] font-medium">Design Studio VI · Indus University (2024)</span>
               </div>
             </div>
           </div>
@@ -485,16 +345,8 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
             <h2 className="font-display font-light text-4xl sm:text-5xl md:text-6xl text-[#141413]">
               Five Architectural Interventions
             </h2>
-            <p className="font-serif italic text-lg sm:text-xl text-[#7A7770] mt-2">
-              Transforming colonial educational architecture into contemporary co-living spaces.
-            </p>
           </div>
 
-          <div className="max-w-md">
-            <p className="font-mono-code text-xs sm:text-sm text-[#5C5751] leading-relaxed">
-              Every design move navigates between heritage conservation and contemporary hospitality requirements: light, volume, structural lightness, and vibrant social connectivity.
-            </p>
-          </div>
         </div>
 
         {/* 5 Core Principles Grid */}
@@ -511,146 +363,12 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
                 <h3 className="font-display text-lg sm:text-xl text-[#141413] mb-2 leading-tight">
                   {p.title}
                 </h3>
-                <p className="font-serif italic text-xs text-[#7A7770] mb-3">
+                <p className="font-serif italic text-xs text-[#7A7770]">
                   {p.subtitle}
                 </p>
               </div>
-              <p className="font-mono-code text-xs text-[#5C5751] leading-relaxed pt-3 border-t border-[#E5E3DD]/60">
-                {p.desc}
-              </p>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 4. 3D VISUAL PERSPECTIVES & SPATIAL EXPERIENCES                           */}
-      {/* ========================================================================= */}
-      <section className="mt-20 md:mt-32 max-w-7xl mx-auto px-6 md:px-12">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#E5E3DD]">
-          <div>
-            <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#B35446] mb-2">
-              <span className="w-2 h-0.5 bg-[#B35446]" />
-              <span>04 / Spatial Visualization</span>
-            </div>
-            <h2 className="font-display font-light text-3xl sm:text-4xl md:text-5xl text-[#141413]">
-              3D Perspectives & Interior Spaces
-            </h2>
-          </div>
-          <p className="max-w-md font-mono-code text-xs text-[#7A7770] leading-relaxed">
-            High-fidelity interior renders showcasing the interplay of historic brick arcades, peach terrazzo, custom furniture, and energetic crimson steel elements.
-          </p>
-        </div>
-
-        {/* 2-Column Perspectives Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {PERSPECTIVES.map((item) => (
-            <div
-              key={item.id}
-              className="bg-[#FAF8F5] border border-[#E5E3DD] rounded-sm overflow-hidden flex flex-col group hover:border-[#B35446] transition-all duration-300"
-            >
-              <div
-                className="relative aspect-[16/10] bg-[#E5E3DD] overflow-hidden cursor-pointer"
-                onClick={() =>
-                  setLightboxImage({
-                    src: item.src,
-                    title: item.title,
-                    subtitle: item.caption,
-                  })
-                }
-                {...viewCursor}
-              >
-                <img
-                  src={item.src}
-                  alt={item.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
-                />
-                <div className="absolute top-4 left-4">
-                  <span className="font-mono-code text-[10px] tracking-wider uppercase bg-[#141413]/80 text-white px-2.5 py-1 rounded-xs backdrop-blur-xs">
-                    {item.tag}
-                  </span>
-                </div>
-                <div className="absolute bottom-4 right-4 bg-white/90 p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity shadow-sm">
-                  <Maximize2 className="w-4 h-4 text-[#141413]" />
-                </div>
-              </div>
-
-              <div className="p-6 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="font-display text-lg sm:text-xl text-[#141413] leading-snug">
-                    {item.title}
-                  </h3>
-                  <p className="font-mono-code text-xs text-[#6E6C65] mt-2 leading-relaxed">
-                    {item.caption}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={() =>
-                    setLightboxImage({
-                      src: item.src,
-                      title: item.title,
-                      subtitle: item.caption,
-                    })
-                  }
-                  {...linkCursor}
-                  className="mt-4 pt-4 border-t border-[#E5E3DD] inline-flex items-center gap-2 font-mono-code text-xs text-[#B35446] hover:text-[#141413] transition-colors"
-                >
-                  <span>View Full Resolution</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 5. ARCHITECTURAL MATERIAL PALETTE & SWATCHES                              */}
-      {/* ========================================================================= */}
-      <section className="mt-20 md:mt-32 max-w-7xl mx-auto px-6 md:px-12">
-        <div className="bg-[#FAF8F5] border border-[#E5E3DD] p-6 sm:p-10 md:p-14 rounded-sm">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10 pb-6 border-b border-[#E5E3DD]">
-            <div>
-              <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#B35446] mb-2">
-                <span className="w-2 h-0.5 bg-[#B35446]" />
-                <span>05 / Material Sensibility</span>
-              </div>
-              <h2 className="font-display font-light text-3xl sm:text-4xl md:text-5xl text-[#141413]">
-                Architectural Material Palette
-              </h2>
-            </div>
-            <p className="max-w-md font-mono-code text-xs text-[#7A7770] leading-relaxed">
-              Extracted directly from Mahi Patel’s presentation sheets: tactile heritage brick juxtaposed against bold red architectural steel, peach terrazzo, and natural fluted oak.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {COLOR_PALETTE.map((c) => (
-              <div
-                key={c.name}
-                className="bg-[#FFFFFF] border border-[#E5E3DD] p-5 rounded-sm flex items-start gap-4 hover:border-[#B35446] hover:shadow-xs transition-all"
-              >
-                <div
-                  className="w-14 h-14 rounded-sm border border-black/10 shrink-0 shadow-inner"
-                  style={{ backgroundColor: c.hex }}
-                />
-                <div className="space-y-1">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-display text-sm font-medium text-[#141413] leading-snug">
-                      {c.name}
-                    </h3>
-                  </div>
-                  <span className="font-mono-code text-[11px] text-[#B35446] font-semibold block">
-                    {c.hex}
-                  </span>
-                  <p className="font-mono-code text-[11px] text-[#7A7770] leading-relaxed pt-1">
-                    {c.description}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
@@ -662,14 +380,11 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
           <div>
             <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#B35446] mb-2">
               <span className="w-2 h-0.5 bg-[#B35446]" />
-              <span>06 / Technical Documentation</span>
+              <span>04 / Technical Documentation</span>
             </div>
             <h2 className="font-display font-light text-3xl sm:text-4xl md:text-5xl text-[#141413]">
-              Plans, Sections & Urban Studies
+              Project Presentation Sheets (01 to 07)
             </h2>
-            <p className="font-serif italic text-base sm:text-lg text-[#7A7770] mt-1">
-              Rigorous architectural drawings rendered with scale bars, room schedules, and structural details.
-            </p>
           </div>
 
           {/* Filter Tabs */}
@@ -683,29 +398,29 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
                   : 'bg-[#FAF8F5] text-[#7A7770] border border-[#E5E3DD] hover:text-[#141413]'
               }`}
             >
-              All Drawings ({TECHNICAL_DRAWINGS.length})
+              All Sheets ({TECHNICAL_DRAWINGS.length})
             </button>
             <button
-              onClick={() => setActiveTab('drawings')}
+              onClick={() => setActiveTab('plans')}
               {...linkCursor}
               className={`px-4 py-1.5 rounded-full text-xs font-mono-code tracking-wider uppercase transition-all ${
-                activeTab === 'drawings'
+                activeTab === 'plans'
                   ? 'bg-[#141413] text-white shadow-xs'
                   : 'bg-[#FAF8F5] text-[#7A7770] border border-[#E5E3DD] hover:text-[#141413]'
               }`}
             >
-              Plans & Sections (6)
+              Concept, Plans & Sections (Sheets 01–04)
             </button>
             <button
-              onClick={() => setActiveTab('analysis')}
+              onClick={() => setActiveTab('suites')}
               {...linkCursor}
               className={`px-4 py-1.5 rounded-full text-xs font-mono-code tracking-wider uppercase transition-all ${
-                activeTab === 'analysis'
+                activeTab === 'suites'
                   ? 'bg-[#141413] text-white shadow-xs'
                   : 'bg-[#FAF8F5] text-[#7A7770] border border-[#E5E3DD] hover:text-[#141413]'
               }`}
             >
-              Urban & Concept (2)
+              Reception & Guestroom Suites (Sheets 05–07)
             </button>
           </div>
         </div>
@@ -740,7 +455,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
                     setLightboxImage({
                       src: drawing.src,
                       title: drawing.title,
-                      subtitle: `${drawing.caption} (Scale: ${drawing.scale})`,
+                      subtitle: `Scale: ${drawing.scale}`,
                     })
                   }
                   {...linkCursor}
@@ -758,7 +473,7 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
                   setLightboxImage({
                     src: drawing.src,
                     title: drawing.title,
-                    subtitle: `${drawing.caption} (Scale: ${drawing.scale})`,
+                    subtitle: `Scale: ${drawing.scale}`,
                   })
                 }
                 {...viewCursor}
@@ -775,81 +490,8 @@ export const UrbenHatchProjectPage: React.FC<UrbenHatchProjectPageProps> = ({
                   </span>
                 </div>
               </div>
-
-              {/* Caption & Highlights */}
-              <div className="mt-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
-                <p className="md:col-span-8 font-mono-code text-xs sm:text-sm text-[#5C5751] leading-relaxed">
-                  {drawing.caption}
-                </p>
-                <div className="md:col-span-4 flex flex-wrap gap-2">
-                  {drawing.highlights.map((h) => (
-                    <span
-                      key={h}
-                      className="font-mono-code text-[10px] uppercase tracking-wider bg-[#FFFFFF] border border-[#E5E3DD] text-[#7A7770] px-2.5 py-1 rounded-xs"
-                    >
-                      {h}
-                    </span>
-                  ))}
-                </div>
-              </div>
             </div>
           ))}
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* 7. SPATIAL PROGRAMME & ACCOMMODATION MATRIX                              */}
-      {/* ========================================================================= */}
-      <section className="mt-20 md:mt-32 max-w-7xl mx-auto px-6 md:px-12">
-        <div className="bg-[#FAF8F5] border border-[#E5E3DD] p-6 sm:p-10 md:p-12 rounded-sm">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pb-6 border-b border-[#E5E3DD]">
-            <div>
-              <div className="inline-flex items-center gap-2 font-mono-code text-xs uppercase tracking-widest text-[#B35446] mb-2">
-                <span className="w-2 h-0.5 bg-[#B35446]" />
-                <span>07 / Program Schedule</span>
-              </div>
-              <h2 className="font-display font-light text-3xl sm:text-4xl text-[#141413]">
-                Spatial Program & Capacity
-              </h2>
-            </div>
-            <p className="max-w-md font-mono-code text-xs text-[#7A7770] leading-relaxed">
-              Zoning summary derived from comparative 1:250 floor plans of R.C. High School adaptive reuse.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-[#FFFFFF] border border-[#E5E3DD] p-6 rounded-sm space-y-2">
-              <span className="font-mono-code text-xs text-[#B35446] uppercase tracking-widest font-medium">Ground Floor Public</span>
-              <h3 className="font-display text-xl text-[#141413]">Civic Atrium & Cafe</h3>
-              <p className="font-mono-code text-xs text-[#7A7770] leading-relaxed">
-                Reception lounge, 60-seat atrium cafe, co-working hub, stepped jaali amphitheater, indoor game hall, public washrooms.
-              </p>
-            </div>
-
-            <div className="bg-[#FFFFFF] border border-[#E5E3DD] p-6 rounded-sm space-y-2">
-              <span className="font-mono-code text-xs text-[#B35446] uppercase tracking-widest font-medium">First Floor Living</span>
-              <h3 className="font-display text-xl text-[#141413]">Private Guestrooms</h3>
-              <p className="font-mono-code text-xs text-[#7A7770] leading-relaxed">
-                Single executive rooms, double boutique suites, private ensuite baths, luggage storage, quiet study reading desks.
-              </p>
-            </div>
-
-            <div className="bg-[#FFFFFF] border border-[#E5E3DD] p-6 rounded-sm space-y-2">
-              <span className="font-mono-code text-xs text-[#B35446] uppercase tracking-widest font-medium">Dormitory Suites</span>
-              <h3 className="font-display text-xl text-[#141413]">Shared Pod Rooms</h3>
-              <p className="font-mono-code text-xs text-[#7A7770] leading-relaxed">
-                4-share and 6-share dormitories, acoustic fabric divider curtains, individual lockable trunks, dual vanity blocks.
-              </p>
-            </div>
-
-            <div className="bg-[#FFFFFF] border border-[#E5E3DD] p-6 rounded-sm space-y-2">
-              <span className="font-mono-code text-xs text-[#B35446] uppercase tracking-widest font-medium">Open Courtyards</span>
-              <h3 className="font-display text-xl text-[#141413]">Microclimate Wells</h3>
-              <p className="font-mono-code text-xs text-[#7A7770] leading-relaxed">
-                Internal open-to-sky courtyards providing stack ventilation, seasonal shade trees, rainwater collection, outdoor relaxation.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
 
